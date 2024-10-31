@@ -1,7 +1,4 @@
-import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
-
-const config: DocsThemeConfig = {
+const config = {
   logo: <div style={{
     display: 'flex',
     alignItems: 'center',
@@ -16,8 +13,16 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/hivelydev/roamify-docs',
   footer: {
-    text: '© 2023 by Roamify',
-  },
+    content: (
+        <span>
+        © {new Date().getFullYear()} ©{' '}
+          <a href="https://docs.getroamify.com" target="_blank">
+          Roamify
+        </a>
+        .
+      </span>
+    )
+  }
 }
 
 export default config
