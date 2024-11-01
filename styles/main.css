@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+}
+
+body {
+    font-family: "Inter var", system-ui, sans-serif;
+}
+
+.link {
+    @apply text-blue-600 hover:text-blue-800 font-semibold underline;
+}
+.inline-code {
+    @apply text-sm text-gray-600 font-semibold;
+}
+
+.home-container {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+}
+.home-section {
+    @apply py-20 sm:py-28;
+}
+
+.mermaidHidden {
+    display: none;
+}
+.mermaidAwsColor span {
+    color: #fff !important;
+}
+.mermaidAwsColor > rect {
+    fill: #FF9900 !important;
+    stroke: #fff !important;
+    stroke-width: 1px !important;
+}
+.mermaidBlack span {
+    color: #fff !important;
+}
+.mermaidBlack > rect {
+    fill: #000 !important;
+    stroke: #fff !important;
+    stroke-width: 1px !important;
+}
+
+.maturity-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 9999px;
+    vertical-align: text-top;
+}

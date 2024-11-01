@@ -11,17 +11,22 @@
     "next": "14.2.16",
     "nextra": "3.2.0",
     "nextra-theme-docs": "3.2.0",
+    "next-seo": "6.6.0",
+    "next-sitemap": "4.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwind-merge": "2.5.4",
     "tailwindcss-animate": "1.0.7",
     "@tailwindcss/typography": "0.5.15",
-    "sharp": "0.33.5"
+    "sharp": "0.33.5",
+    "@heroicons/react": "2.1.5"
   },
   "devDependencies": {
+    "@types/react": "18.3.12",
     "@types/node": "18.18.7",
     "typescript": "5.6.3",
     "prettier": "3.3.3",
+    "postcss": "8.4.47",
     "react-test-renderer": "18.3.1",
     "tailwindcss": "3.4.14",
     "autoprefixer": "10.4.20",

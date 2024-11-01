@@ -1,6 +1,9 @@
 export default {
   "index": "Introduction",
-  "esim": "eSIM",
+  "authentication": "Authentication",
+  "esims": "eSIMs Module",
+  "gift-cards": "Gift Cards Module",
+  "health": "Health Check",
   "about": {
     "title": "About",
     "type": "page"
@@ -8,7 +11,7 @@ export default {
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://www.getroamify.com/contact",
+    "href": "https://partner.getroamify.com/sign-up",
     "newWindow": true
   }
 }
