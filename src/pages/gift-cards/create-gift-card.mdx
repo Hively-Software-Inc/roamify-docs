@@ -1,0 +1,90 @@
+import { NextSeo } from 'next-seo';
+import { Tabs } from 'nextra/components';
+
+<NextSeo description="How to create a gift card with Roamify API?" title="Create Gift Card" />
+
+# Create Gift Card
+To create a gift card, you need to send a `POST` request to the `/api/gifts/gift` endpoint. The request body should contain the following parameters:
+
+- `orderId`: The order ID of for your own reference. This is a required field of type `string`.
+- `senderEmail`: The email address of the sender. This is a required field of type `string`.
+- `sender`: The name of the sender. This is an optional field of type `string`.
+- `amount`: The amount of the gift card. This is a required field of type `number`.
+- `currency`: The currency of the gift card. This is a required field of type `string`. The currency should be in [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format.
+Currently supported currencies are:
+  - `USD`: United States Dollar
+  - `CAD`: Canadian Dollar
+  - `EUR`: Euro
+  - `GBP`: British Pound
+  - `AUD`: Australian Dollar
+  - `CNY`: Chinese Yuan
+  - `HKD`: Hong Kong Dollar
+  - `JPY`: Japanese Yen
+  - `SGD`: Singapore Dollar
+  - `TWD`: New Taiwan Dollar
+  - `KRW`: South Korean Won
+  - `AED`: United Arab Emirates Dirham
+  - `MXN`: Mexican Peso
+  - `SAR`: Saudi Riyal
+  - `EGP`: Egyptian Pound
+  - `RUB`: Russian Ruble
+  - `QAR`: Qatari Riyal
+  - `INR`: Indian Rupee
+  - `THB`: Thai Baht
+  - `BGN`: Bulgarian Lev
+  - `BRL`: Brazilian Real
+  - `CHF`: Swiss Franc
+  - `CZK`: Czech Koruna
+  - `DKK`: Danish Krone
+  - `HUF`: Hungarian Forint
+  - `MYR`: Malaysian Ringgit
+  - `NOK`: Norwegian Krone
+  - `NZD`: New Zealand Dollar
+  - `PLN`: Polish Zloty
+  - `RON`: Romanian Leu
+  - `SEK`: Swedish Krona
+
+## Example
+Here is an example of how you can create a gift card using Roamify Gift Card API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request POST \
+        --url 'https://api-dev.getroamify.com/api/gifts/gift' \
+        --header 'Authorization: Bearer AssessToken' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "orderId": "your-order-id",
+            "amount": 100,
+            "currency": "USD",
+            "senderEmail": "test@mail.com",
+            "sender": ""
+        }'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.post('https://api-dev.getroamify.com/api/gifts/gift', {
+            orderId: 'your-order-id',
+            amount: 100,
+            currency: 'USD',
+            senderEmail: 'test@mail.com',
+            sender: ''
+        }, {
+            headers: {
+                Authorization: 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
