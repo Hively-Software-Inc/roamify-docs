@@ -4,14 +4,9 @@ import { Tabs } from 'nextra/components';
 <NextSeo description="How to get a list of countries with Roamify eSIM API?" title="Countries" />
 
 # Countries
-To get a list of countries, you need to send a `GET` request to the `/api/esims/countries` endpoint.
+To get a list of countries, you need to send a `GET` request to the `/api/esim/countries` endpoint.
 
 There are no required parameters for this endpoint.
-
-The response will contain a list of countries with the following details:
-
-- `code`: The country code of the country following the ISO 3166-1 alpha-2 standard.
-- `name`: The name of the country.
 
 ## Example
 Here is an example of how you can get a list of countries using Roamify eSIM API.
@@ -20,7 +15,7 @@ Here is an example of how you can get a list of countries using Roamify eSIM API
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/esims/countries' \
+        --url 'https://api-dev.getroamify.com/api/esim/countries' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -29,7 +24,7 @@ Here is an example of how you can get a list of countries using Roamify eSIM API
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/esims/countries', {
+        axios.get('https://api-dev.getroamify.com/api/ /countries', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -44,3 +39,38 @@ Here is an example of how you can get a list of countries using Roamify eSIM API
         ```
     </Tabs.Tab>
 </Tabs>
+
+## Sample Response
+```json
+{
+	"status": "success",
+	"data": {
+		"countries": [
+			{
+				"code": "AF",
+				"name": "Afghanistan"
+			},
+			{
+				"code": "AF",
+				"name": "Africa Adventure"
+			},
+			{
+				"code": "AX",
+				"name": "Åland Islands"
+			},
+			{
+				"code": "AL",
+				"name": "Albania"
+			},
+			{
+				"code": "DZ",
+				"name": "Algeria"
+			},
+			{
+				"code": "AD",
+				"name": "Andorra"
+			}
+        ]
+    }
+}
+```

@@ -4,8 +4,9 @@ import { Tabs } from 'nextra/components';
 <NextSeo description="Get a gift card or list of gift cards with Roamify API." title="Get Gift Card" />
 
 # Get Gift Card
-To get a gift card or list of gift cards, you need to send a `GET` request to the `/api/gifts/gift` endpoint. The request body should contain the following parameters:
+To get a gift card or list of gift cards, you need to send a `GET` request to the `/api/gifts/gift` endpoint. 
 
+The request parameters should contain the following:
 - `orderId`: The order ID of the gift card. This is an required field of type `string`.
 
 ## Example
@@ -44,8 +45,9 @@ Here is an example of how you can get a gift card using Roamify Gift Card API.
 <br />
 
 # Get Gift Cards
-To get a list of gift cards, you need to send a `GET` request to the `/api/gifts/gifts` endpoint. The request body should contain the following parameters:
+To get a list of gift cards, you need to send a `GET` request to the `/api/gifts/gifts` endpoint. 
 
+There are no required parameters for this endpoint, but you can filter the gift cards based on the following optional parameters:
 - `status`: The status of the gift card. This is an optional field of type `string`. Possible values are `NEW`, `REDEEMED`, `EXPIRED`, `VOIDED`, `REFUNDED`, `UNKNOWN`.
 
 ## Example

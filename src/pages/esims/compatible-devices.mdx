@@ -4,7 +4,7 @@ import { Tabs } from 'nextra/components';
 <NextSeo description="How to get a list of compatible devices with Roamify eSIM API?" title="Compatible Devices" />
 
 # Compatible Devices
-To get a list of compatible devices, you need to send a `GET` request to the `/api/esims/compatible-devices` endpoint.
+To get a list of compatible devices, you need to send a `GET` request to the `/api/compatible-devices` endpoint.
 
 There are no required parameters for this endpoint.
 
@@ -15,7 +15,7 @@ Here is an example of how you can get a list of compatible devices using Roamify
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/esims/compatible-devices' \
+        --url 'https://api-dev.getroamify.com/api/compatible-devices' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -24,7 +24,7 @@ Here is an example of how you can get a list of compatible devices using Roamify
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/esims/compatible-devices', {
+        axios.get('https://api-dev.getroamify.com/api/compatible-devices', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -39,3 +39,26 @@ Here is an example of how you can get a list of compatible devices using Roamify
         ```
     </Tabs.Tab>
 </Tabs>
+
+## Sample Response
+```json
+{
+	"status": "success",
+	"data": [
+		{
+			"model": "Samsung Galaxy Note 20 / Note 20 Plus / Note 20 Ultra",
+			"deviceType": "smartphone",
+			"os": "android",
+			"brand": "Samsung",
+			"name": "Samsung Galaxy Note 20 series"
+		},
+		{
+			"model": "Rakuten BIG / Rakuten BIG-S",
+			"deviceType": "smartphone",
+			"os": "android",
+			"brand": "Rakuten",
+			"name": "Rakuten BIG series"
+		}
+    ]
+}
+```

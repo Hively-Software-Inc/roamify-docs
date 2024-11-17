@@ -1,3 +1,8 @@
+import { NextSeo } from 'next-seo';
+import { Tabs } from 'nextra/components';
+
+<NextSeo description="How to get started with Roamify eSIM API?" title="eSIM Overview" />
+
 # eSIM Overview
 Roamify eSIM API consists of the following services:
 
@@ -5,10 +10,287 @@ Roamify eSIM API consists of the following services:
 - [Packages](/esims/packages)
 - [eSIMs](/esims/esims)
 - [Orders](/esims/orders)
-- [Order Status](/esims/order-status)
 - [Compatible Devices](/esims/compatible-devices)
 - [Balance](/esims/balance)
 
 You can use these services to buy eSIMs, check your balance, and more.
 
-These services required authentication. You must have an Access Token to make requests to these services. You can get your Access Token from [Roamify Partner Portal](https://partner.getroamify.com/sign-in).
+## Recommended steps to use Roamify eSIM API
+
+### Step 1: Authentication
+You need to have your Access Token to make requests to Roamify eSIM API. You can get your Access Token from [Roamify Partner Portal](https://partner.getroamify.com/sign-in).
+
+If you don't have an account, you can sign up [here](https://partner.getroamify.com/sign-up) or contact us at [support@getroamify.com](mailto:support@getroamify.com).
+
+Our token is a Bearer token, which means you need to include it in the `Authorization` header of your requests.
+
+### Step 2: Get eSIM Packages
+To get a list of eSIM packages, you need to send a `GET` request to the `/api/esim/packages` endpoint. 
+
+This endpoint will return a list of all available eSIM packages. You can also filter the packages by country and geography.
+
+#### Example
+Here is an example of how you can get a list of eSIM packages using Roamify eSIM API.
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request GET \
+        --url 'https://api-dev.getroamify.com/api/esim/packages' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.get('https://api-dev.getroamify.com/api/esim/packages', {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/packages).
+
+### Step 3: Submit an eSIM Order
+To submit an eSIM order, you need to send a `POST` request to the `/api/esim/order` endpoint with the required body parameters.
+
+The request body should contain the following parameters:
+- `items`: An array of eSIMs you want to order. Each eSIM should contain the following details:
+  - `packageId`: The ID of the eSIM package. This is a required field of type `string`.
+  - `quantity`: The quantity of the eSIMs you want to order. This is a required field of type `number`.
+
+#### Example
+Here is an example of how you can create an eSIM order using Roamify eSIM API.
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request POST \
+        --url 'https://api-dev.getroamify.com/api/esim/order' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "items": [
+                {
+                    "packageId": "Package ID",
+                    "quantity": 1
+                }
+            ]
+        }'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.post('https://api-dev.getroamify.com/api/esim/order', {
+            items: [
+                {
+                    packageId: 'Package ID',
+                    quantity: 1
+                }
+            ]
+        }, {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/orders).
+
+### Step 4: Generate eSIM
+As soon as you submit an eSIM order, in the response, you will get a dedicated `esimId` for each eSIM package you ordered. You can use this `esimId` to generate an eSIM, which will be ready to be used by your customers.
+
+To generate an eSIM, you need to send a `POST` request to the `/api/esim/apply` endpoint with the required body parameters.
+
+The request body should contain the following parameters:
+- `esimId`: The ID of the eSIM. This is a required field of type `string`.
+
+#### Example
+Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request POST \
+        --url 'https://api-dev.getroamify.com/api/esim/apply' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "esimId": "eSIM ID"
+        }'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.post('https://api-dev.getroamify.com/api/esim/apply', {
+            esimId: 'eSIM ID'
+        }, {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/esims).
+
+### Step 5: Get eSIM Usage
+To get the usage details of an eSIM, you need to send a `GET` request to the `/api/esim/usage` endpoint with the required parameters.
+
+The parameters required for this endpoint are:
+- `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
+
+#### Example
+Here is an example of how you can get the usage details of an eSIM using Roamify eSIM API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request GET \
+        --url 'https://api-dev.getroamify.com/api/esim/usage?iccid=ICCID' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.get('https://api-dev.getroamify.com/api/esim/usage?iccid=ICCID', {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/esims).
+
+### Step 6: Top-up an eSIM
+You may need to top-up an eSIM if the balance is low or the data limit is reached. To top-up an eSIM, you need to send a `POST` request to the `/api/esim/order/topup` endpoint with the required body parameters.
+
+The request body should contain the following parameters:
+- `iccid`: The ICCID of the eSIM you want to top-up. This is a required field of type `string`.
+- `packageId`: The ID of the eSIM package you want to top-up. This is a required field of type `string`.
+
+#### Example
+Here is an example of how you can create a top-up order using Roamify eSIM API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request POST \
+        --url 'https://api-dev.getroamify.com/api/esim/order/topup' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "iccid": "ICCID",
+            "packageId": "Package ID"
+        }'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.post('https://api-dev.getroamify.com/api/esim/order/topup', {
+            iccid: 'ICCID',
+            packageId: 'Package ID'
+        }, {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/orders).
+
+### Step 7: Get Balance
+To get the remaining balance of your funds, you need to send a `GET` request to the `/api/balance` endpoint.
+
+There are no required parameters for this endpoint.
+
+#### Example
+Here is an example of how you can get the remaining balance of your funds using Roamify eSIM API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request GET \
+        --url 'https://api-dev.getroamify.com/api/balance' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.get('https://api-dev.getroamify.com/api/balance', {
+            headers: {
+                'Authorization': 'Bearer Access Token',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+You can read more about this endpoint [here](/esims/balance).
+
+### The End
+That's it! You have successfully integrated Roamify eSIM API into your application. If you have any questions or need help, feel free to contact us at [support@getroamify.com](mailto:support@getroamify.com).
