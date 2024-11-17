@@ -4,8 +4,9 @@ import { Tabs } from 'nextra/components';
 <NextSeo description="How to get a list of eSIM packages with Roamify API?" title="Get eSIM Packages"/>
 
 # Get eSIM Packages
-To get a list of eSIM packages, you need to send a `GET` request to the `/api/esims/packages` endpoint. The request body should contain the following parameters:
+To get a list of eSIM packages, you need to send a `GET` request to the `/api/esim/packages` endpoint. 
 
+The request body should contain the following parameters:
 - `country`: The country code of the eSIM packages. This is an optional field of type `string`. If you do not provide a country code, the API will return a list of all available eSIM packages. It follows the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
 - `geography`: The geography of the eSIM packages. This is an optional field of type `string`. It can be any of the following values:
   - `local`: Local packages
@@ -20,7 +21,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/esims/packages' \
+        --url 'https://api-dev.getroamify.com/api/esim/packages' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -29,7 +30,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/esims/packages', {
+        axios.get('https://api-dev.getroamify.com/api/esim/packages', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -53,7 +54,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/esims/packages?country=US' \
+        --url 'https://api-dev.getroamify.com/api/esim/packages?country=US' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -62,7 +63,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/esims/packages?country=US', {
+        axios.get('https://api-dev.getroamify.com/api/esim/packages?country=US', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -85,7 +86,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/esims/packages?geography=global' \
+        --url 'https://api-dev.getroamify.com/api/esim/packages?geography=global' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -94,7 +95,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/esims/packages?geography=global', {
+        axios.get('https://api-dev.getroamify.com/api/esim/packages?geography=global', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -109,3 +110,202 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
         ```
     </Tabs.Tab>
 </Tabs>
+
+### Sample Response
+```json
+{
+	"status": "success",
+	"data": {
+		"packages": [
+			{
+				"id": "afghanistan-esims",
+				"countryName": "Afghanistan",
+				"countryCode": "AF",
+				"countrySlug": "afghanistan",
+				"region": "Asia",
+				"geography": "local",
+				"minPrice": 5,
+				"maxPrice": 5,
+				"image": "https://imagedelivery.net/uUE6LNs_ci8SFBH4_n66dQ/countries/flags/afghanistan/public",
+				"signals": [
+					{
+						"code": "AF",
+						"name": "Afghanistan",
+						"networks": [
+							"3G",
+							"4G"
+						],
+						"carriers": [
+							"MTN"
+						]
+					}
+				],
+				"packages": [
+					{
+						"packageId": "esim-afghanistan-7days-1gb-all",
+						"package": "1 GB - 7 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 7,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 1024,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					},
+					{
+						"packageId": "esim-afghanistan-15days-2gb-all",
+						"package": "2 GB - 15 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 15,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 2048,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					},
+					{
+						"packageId": "esim-afghanistan-15days-3gb-all",
+						"package": "3 GB - 15 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 15,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 3072,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					},
+					{
+						"packageId": "esim-afghanistan-30days-3gb-all",
+						"package": "3 GB - 30 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 30,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 3072,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					},
+					{
+						"packageId": "esim-afghanistan-15days-5gb-all",
+						"package": "5 GB - 15 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 15,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 5120,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					},
+					{
+						"packageId": "esim-afghanistan-30days-5gb-all",
+						"package": "5 GB - 30 Days",
+						"plan": "data-only",
+						"activation": "first-use",
+						"day": 30,
+						"price": 5,
+						"isUnlimited": false,
+						"isAPNAutomatic": true,
+						"apn": "globaldata",
+						"apnUsername": "",
+						"apnPassword": "",
+						"dataAmount": 5120,
+						"dataUnit": "MB",
+						"callType": "all",
+						"callAmount": -1,
+						"callUnit": "",
+						"smsType": "all",
+						"smsAmount": -1,
+						"smsUnit": "",
+						"withSMS": false,
+						"withCall": false,
+						"withHotspot": true,
+						"withDataRoaming": true,
+						"withDestinationInstall": false,
+						"notes": []
+					}
+				]
+			}
+        ]
+    }
+}
+```
