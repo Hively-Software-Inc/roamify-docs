@@ -1,11 +1,12 @@
 import { NextSeo } from 'next-seo';
 import { Tabs } from 'nextra/components';
 
-<NextSeo description="How to create a gift card with Roamify API?" title="Create Gift Card" />
+<NextSeo description="How to create a gift card with Roamify API?" title="Roamify API - Create Gift Card" />
 
 # Create Gift Card
-To create a gift card, you need to send a `POST` request to the `/api/gifts/gift` endpoint. The request body should contain the following parameters:
+To create a gift card, you need to send a `POST` request to the `/api/gifts/gift` endpoint. 
 
+The request body should contain the following parameters:
 - `orderId`: The order ID of for your own reference. This is a required field of type `string`.
 - `senderEmail`: The email address of the sender. This is a required field of type `string`.
 - `sender`: The name of the sender. This is an optional field of type `string`.
