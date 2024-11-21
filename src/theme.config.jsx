@@ -12,33 +12,6 @@ const config = {
         link: 'https://docs.getroamify.com',
     },
     docsRepositoryBase: 'https://github.com/hivelydev/roamify-docs',
-    useNextSeoProps() {
-        const {asPath} = useRouter();
-        // On SSG the path is `/index` instead of `/` for some reason
-        if (asPath === '/' || asPath === '/index') {
-            return {
-                titleTemplate: 'Roamify - best eSIM API for developers',
-                openGraph: {
-                    images: [
-                        {
-                            url: 'https://docs.getroamify.com/logo.webp'
-                        }
-                    ]
-                }
-            };
-        } else {
-            return {
-                titleTemplate: '%s – Roamify API',
-                openGraph: {
-                    images: [
-                        {
-                            url: 'https://docs.getroamify.com/logo.webp'
-                        }
-                    ]
-                }
-            };
-        }
-    },
     chat: {
         link: 'https://twitter.com/roamifyhq',
         icon: (
@@ -63,7 +36,19 @@ const config = {
             <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta property="og:locale" content="en_US"/>
+            <mete property="og:type" content="website"/>
+            <meta property="og:title" content={"Roamify API"}/>
+            <meta
+                property="og:description"
+                content={"Roamify API Documentation made with Nextra, empowering you to create a travel business at scale."}
+            />
+            <meta property="og:url" content="https://docs.getroamify.com"/>
             <meta property="og:site_name" content="Roamify"/>
+            <meta
+                property="description"
+                content={"Roamify API Documentation made with Nextra, empowering you to create a travel business at scale."}
+            />
+            <title>Roamify API</title>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:creator" content="@roamifyhq"/>
         </>
