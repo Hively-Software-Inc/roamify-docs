@@ -1,4 +1,7 @@
-const config = {
+import React from 'react'
+import { DocsThemeConfig } from 'nextra-theme-docs'
+
+const config: DocsThemeConfig = {
     logo: <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -27,7 +30,6 @@ const config = {
     nextThemes: {
         defaultTheme: 'dark',
     },
-    primaryHue: 202,
     sidebar: {
         defaultMenuCollapseLevel: 1,
     },
@@ -36,7 +38,6 @@ const config = {
             <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta property="og:locale" content="en_US"/>
-            <mete property="og:type" content="website"/>
             <meta property="og:title" content={"Roamify API"}/>
             <meta
                 property="og:description"

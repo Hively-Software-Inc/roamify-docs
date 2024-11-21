@@ -6,7 +6,6 @@ export default {
   "health": "Health Check",
   "about": {
     "title": "About",
-    "description": "About Roamify API",
     "type": "page"
   },
   "contact": {
