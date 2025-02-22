@@ -1,21 +1,18 @@
-import { NextSeo } from 'next-seo';
 import { Tabs } from 'nextra/components';
 
-<NextSeo description="How to get remaining balance of your funds with Roamify eSIM API?" title="eSIM API - Check Balance"  />
-
-# Balance
-To get the remaining balance of your funds, you need to send a `GET` request to the `/api/balance` endpoint.
+# Countries
+To get a list of countries, you need to send a `GET` request to the `/api/esim/countries` endpoint.
 
 There are no required parameters for this endpoint.
 
 ## Example
-Here is an example of how you can get the remaining balance of your funds using Roamify eSIM API.
+Here is an example of how you can get a list of countries using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
     <Tabs.Tab index={0}>
         ```bash
         curl --request GET \
-        --url 'https://api-dev.getroamify.com/api/balance' \
+        --url 'https://api-dev.getroamify.com/api/esim/countries' \
         --header 'Authorization: Bearer Access Token' \
         --header 'Content-Type: application/json'
         ```
@@ -24,7 +21,7 @@ Here is an example of how you can get the remaining balance of your funds using 
         ```javascript
         const axios = require('axios');
 
-        axios.get('https://api-dev.getroamify.com/api/balance', {
+        axios.get('https://api-dev.getroamify.com/api/ /countries', {
             headers: {
                 'Authorization': 'Bearer Access Token',
                 'Content-Type': 'application/json'
@@ -45,8 +42,32 @@ Here is an example of how you can get the remaining balance of your funds using 
 {
 	"status": "success",
 	"data": {
-		"balance": 3723.35,
-		"currency": "USD"
-	}
+		"countries": [
+			{
+				"code": "AF",
+				"name": "Afghanistan"
+			},
+			{
+				"code": "AF",
+				"name": "Africa Adventure"
+			},
+			{
+				"code": "AX",
+				"name": "Åland Islands"
+			},
+			{
+				"code": "AL",
+				"name": "Albania"
+			},
+			{
+				"code": "DZ",
+				"name": "Algeria"
+			},
+			{
+				"code": "AD",
+				"name": "Andorra"
+			}
+        ]
+    }
 }
 ```
