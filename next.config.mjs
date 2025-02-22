@@ -3,11 +3,10 @@ import nextra from 'nextra'
 const withNextra = nextra({
     latex: true,
     search: {
-        codeblocks: false
+        codeblocks: true
     },
 })
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
     trailingSlash: true,
@@ -37,9 +36,6 @@ const nextConfig = {
                 ],
             },
         ];
-    },
-    compiler: {
-        removeConsole: process.env.APP_ENV === "production",
     },
     devIndicators: {
         buildActivity: true,
