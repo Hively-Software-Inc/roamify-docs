@@ -97,10 +97,6 @@ const search = <Search
     errorText={'There was an error while searching!'}
     placeholder={'Search...'}
     loading={'Searching...'}
-    searchOptions={{
-        preload: true,
-        verbose: true,
-    }}
 />
 
 export default async function RootLayout({children}: { children: React.ReactNode }) {
