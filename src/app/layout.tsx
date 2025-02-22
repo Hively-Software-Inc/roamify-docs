@@ -1,5 +1,5 @@
 import {Footer, Layout, Navbar} from 'nextra-theme-docs'
-import {Banner, Head} from 'nextra/components'
+import {Banner, Head, Search} from 'nextra/components'
 import {getPageMap} from 'nextra/page-map'
 import React from "react";
 import '@/styles/globals.css'
@@ -92,6 +92,17 @@ const footer = (
     </Footer>
 )
 
+const search = <Search
+    emptyResult={'No results found!'}
+    errorText={'There was an error while searching!'}
+    placeholder={'Search...'}
+    loading={'Searching...'}
+    searchOptions={{
+        preload: true,
+        verbose: true,
+    }}
+/>
+
 export default async function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html
@@ -108,6 +119,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
             darkMode={true}
             banner={banner}
             navbar={navbar}
+            search={search}
             nextThemes={{
                 defaultTheme: 'dark',
             }}
