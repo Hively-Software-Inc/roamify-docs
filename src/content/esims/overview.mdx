@@ -1,6 +1,10 @@
 import { Tabs } from 'nextra/components';
 
-# eSIM Overview
+## On this page
+- [eSIM Overview](#eSIM-Overview)
+- [Recommended steps to use eSIM API](#recommended-steps-to-use-esim-api)
+
+## eSIM Overview
 Roamify eSIM API consists of the following services:
 
 - [Countries](/esims/countries)
@@ -12,7 +16,7 @@ Roamify eSIM API consists of the following services:
 
 You can use these services to buy eSIMs, check your balance, and more.
 
-## Recommended steps to use Roamify eSIM API
+## Recommended steps to use eSIM API
 
 ### Step 1: Authentication
 You need to have your Access Token to make requests to Roamify eSIM API. You can get your Access Token from [Roamify Partner Portal](https://partner.getroamify.com/sign-in).
@@ -26,7 +30,7 @@ To get a list of eSIM packages, you need to send a `GET` request to the `/api/es
 
 This endpoint will return a list of all available eSIM packages. You can also filter the packages by country and geography.
 
-#### Example
+#### Usage - how to get eSIM packages
 Here is an example of how you can get a list of eSIM packages using Roamify eSIM API.
 <Tabs items={['curl', 'javascript']}>
     <Tabs.Tab index={0}>
@@ -43,7 +47,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 
         axios.get('https://api-dev.getroamify.com/api/esim/packages', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -67,7 +71,7 @@ The request body should contain the following parameters:
   - `packageId`: The ID of the eSIM package. This is a required field of type `string`.
   - `quantity`: The quantity of the eSIMs you want to order. This is a required field of type `number`.
 
-#### Example
+#### Usage - how to create an eSIM order
 Here is an example of how you can create an eSIM order using Roamify eSIM API.
 <Tabs items={['curl', 'javascript']}>
     <Tabs.Tab index={0}>
@@ -99,7 +103,7 @@ Here is an example of how you can create an eSIM order using Roamify eSIM API.
             ]
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -123,7 +127,7 @@ To generate an eSIM, you need to send a `POST` request to the `/api/esim/apply` 
 The request body should contain the following parameters:
 - `esimId`: The ID of the eSIM. This is a required field of type `string`.
 
-#### Example
+#### Usage - how to generate an eSIM profile
 Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -146,7 +150,7 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
             esimId: 'eSIM ID'
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -168,7 +172,7 @@ To get the usage details of an eSIM, you need to send a `GET` request to the `/a
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
 
-#### Example
+#### Usage - how to check eSIM usage
 Here is an example of how you can get the usage details of an eSIM using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -186,7 +190,7 @@ Here is an example of how you can get the usage details of an eSIM using Roamify
 
         axios.get('https://api-dev.getroamify.com/api/esim/usage?iccid=ICCID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -209,7 +213,7 @@ The request body should contain the following parameters:
 - `iccid`: The ICCID of the eSIM you want to top-up. This is a required field of type `string`.
 - `packageId`: The ID of the eSIM package you want to top-up. This is a required field of type `string`.
 
-#### Example
+#### Usage - how to create a top-up order
 Here is an example of how you can create a top-up order using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -234,7 +238,7 @@ Here is an example of how you can create a top-up order using Roamify eSIM API.
             packageId: 'Package ID'
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -255,7 +259,7 @@ To get the remaining balance of your funds, you need to send a `GET` request to 
 
 There are no required parameters for this endpoint.
 
-#### Example
+#### Usage - how to check your balance
 Here is an example of how you can get the remaining balance of your funds using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -273,7 +277,7 @@ Here is an example of how you can get the remaining balance of your funds using 
 
         axios.get('https://api-dev.getroamify.com/api/balance', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

@@ -1,12 +1,15 @@
 import { Tabs } from 'nextra/components';
 
-# Revoke Gift Card
+## On this page
+- [Revoke Gift Card](#revoke-gift-card)
+
+## Revoke Gift Card
 To revoke a gift card, you need to send a `POST` request to the `/api/gifts/revoke` endpoint. 
 
 The request body should contain the following:
 - `orderId`: The order ID of the gift card. This is a required field of type `string`.
 
-## Example
+## Usage - revoke a gift card
 Here is an example of how you can revoke a gift card using Roamify Gift Card API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -29,7 +32,7 @@ Here is an example of how you can revoke a gift card using Roamify Gift Card API
             orderId: 'your-order-id'
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

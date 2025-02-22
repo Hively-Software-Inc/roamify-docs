@@ -1,6 +1,13 @@
 import {  Tabs } from 'nextra/components';
 
-# Authentication
+## On this page
+- [Auth with Roamify API](#auth-with-roamify-api)
+- [Authentication Flow](#authentication-flow)
+- [Access Token](#access-token)
+- [Refresh Token](#refresh-token)
+- [Usage - how to use your Access Token](#usage---how-to-use-your-access-token)
+
+## Auth with Roamify API
 We are using OAuth 2.0 for authentication. To authenticate with Roamify eSIM API, you need to follow the steps below.
 
 ## Authentication Flow
@@ -13,7 +20,7 @@ Your Access Token is a long-lived token that you can use to make requests to Roa
 ## Refresh Token
 You can refresh your Access Token in the Roamify Partner Portal, under the `API Keys` section. Upon refreshing your Access Token, your old Access Token will be invalidated.
 
-## Example
+## Usage - how to use your Access Token
 Here is an example of how you can use your Access Token to make requests to Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -21,7 +28,7 @@ Here is an example of how you can use your Access Token to make requests to Roam
         ```bash
         curl --request GET \
         --url 'https://api-dev.getroamify.com/api/esim/countries?=' \
-        --header 'Authorization: Bearer Access Token' \
+        --header 'Authorization: Bearer {access token here}' \
         --header 'Content-Type: application/json' \
         ```
     </Tabs.Tab>
@@ -32,8 +39,7 @@ Here is an example of how you can use your Access Token to make requests to Roam
         axios.get('https://api-dev.getroamify.com/api/esim/countries?', {
             headers: {
                 '
-                Authorization: Bearer
-                Access Token',
+                Authorization: Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

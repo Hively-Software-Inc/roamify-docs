@@ -1,6 +1,12 @@
 import { Tabs } from 'nextra/components';
 
-# Manage eSIMs
+## On this page
+- [Generate eSIM Profile](#generate-esim-profile)
+- [Get eSIM Usage](#get-esim-usage)
+- [Get eSIM Compatible Top-ups](#get-esim-compatible-top-ups)
+- [Get eSIM Packages History](#get-esim-packages-history)
+- [Get eSIM](#get-esim)
+- [Get eSIMs List](#get-esims-list)
 
 ## Generate eSIM Profile
 After you placed an order for eSIMs, you will get a dedicated ID called `esimId` for each eSIM. You can use this ID to generate a eSIM profile and ready to be used by your customers.
@@ -10,7 +16,7 @@ To apply an eSIM profile, you need to send a `POST` request to the `/api/esim/ap
 The request body should contain the following parameters:
 - `esimId`: The ID of the eSIM. This is a required field of type `string`.
 
-### Example
+### Usage - generate eSIM profile
 Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -33,7 +39,7 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
             esimId: 'eSIM ID'
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -101,7 +107,7 @@ To get the usage details of an eSIM, you need to send a `GET` request to the `/a
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
 
-### Example
+### Usage - fetch eSIM usage
 Here is an example of how you can get the usage details of an eSIM using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -119,7 +125,7 @@ Here is an example of how you can get the usage details of an eSIM using Roamify
 
         axios.get('https://api-dev.getroamify.com/api/esim/usage?iccid=ICCID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -156,7 +162,7 @@ To get a list of compatible top-ups for an eSIM, you need to send a `GET` reques
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
 
-### Example
+### Usage - fetch compatible top-ups
 Here is an example of how you can get a list of compatible top-ups for an eSIM using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -174,7 +180,7 @@ Here is an example of how you can get a list of compatible top-ups for an eSIM u
 
         axios.get('https://api-dev.getroamify.com/api/esim/topup/packages?iccid=ICCID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -238,7 +244,7 @@ To get a history of eSIM packages applied to a eSIM, you need to send a `GET` re
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
 
-### Example
+### Usage - fetch eSIM packages history
 Here is an example of how you can get a history of eSIM packages applied to an eSIM using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -256,7 +262,7 @@ Here is an example of how you can get a history of eSIM packages applied to an e
 
         axios.get('https://api-dev.getroamify.com/api/esim/history?iccid=ICCID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -295,7 +301,7 @@ To get an eSIM, you need to send a `GET` request to the `/api/esim` endpoint.
 The request body should contain the following parameters:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
 
-### Example
+### Usage - fetch an eSIM
 Here is an example of how you can get an eSIM using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -313,7 +319,7 @@ Here is an example of how you can get an eSIM using Roamify eSIM API.
 
         axios.get('https://api-dev.getroamify.com/api/esim?iccid=ICCID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -389,7 +395,7 @@ There are no required parameters for this endpoint, but you can provide the foll
 
 - `limit`: The number of eSIM orders to return. This is an optional field of type `number`. The default value is `50`.
 
-### Example
+### Usage - fetch a list of eSIMs
 Here is an example of how you can get a list of eSIMs using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -407,7 +413,7 @@ Here is an example of how you can get a list of eSIMs using Roamify eSIM API.
 
         axios.get('https://api-dev.getroamify.com/api/esims', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

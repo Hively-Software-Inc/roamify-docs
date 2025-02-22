@@ -1,6 +1,9 @@
 import { Tabs } from 'nextra/components';
 
-# Get eSIM Packages
+## On this page
+- [Get eSIM Packages](#get-esim-packages)
+
+## Get eSIM Packages
 To get a list of eSIM packages, you need to send a `GET` request to the `/api/esim/packages` endpoint. 
 
 The request body should contain the following parameters:
@@ -10,7 +13,7 @@ The request body should contain the following parameters:
   - `regional`: Regional packages
   - `global`: Global packages
 
-## Example
+## Usage examples
 Here is an example of how you can get a list of eSIM packages using Roamify eSIM API.
 
 ### Example Request 1: Get all eSIM packages
@@ -29,7 +32,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 
         axios.get('https://api-dev.getroamify.com/api/esim/packages', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -62,7 +65,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 
         axios.get('https://api-dev.getroamify.com/api/esim/packages?country=US', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -94,7 +97,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 
         axios.get('https://api-dev.getroamify.com/api/esim/packages?geography=global', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
