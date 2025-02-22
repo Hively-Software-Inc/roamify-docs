@@ -1,0 +1,9 @@
+@import "../../node_modules/tailwindcss/dist/lib.d.mts";
+@import 'style.css';
+
+:root {
+}
+
+body {
+    font-family: "Inter var", system-ui, sans-serif;
+}
