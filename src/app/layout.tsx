@@ -1,8 +1,8 @@
 import {Footer, Layout, Navbar} from 'nextra-theme-docs'
 import {Banner, Head} from 'nextra/components'
 import {getPageMap} from 'nextra/page-map'
-import '@/styles/global.css'
 import React from "react";
+import '@/styles/globals.css'
 
 export const metadata = {
     metadataBase: new URL('https://docs.getroamify.com'),
