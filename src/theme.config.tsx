@@ -10,7 +10,9 @@ const config: DocsThemeConfig = {
         width: '20px',
         height: '20px',
         marginRight: '10px'
-    }} alt={"logo"}/><span>Roamify API</span></div>,
+    }} alt={"logo"}/><span>
+        eSIM API - Roamify
+    </span></div>,
     project: {
         link: 'https://docs.getroamify.com',
     },
@@ -38,18 +40,20 @@ const config: DocsThemeConfig = {
             <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta property="og:locale" content="en_US"/>
-            <meta property="og:title" content={"Roamify API"}/>
+            <meta property="og:title" content={"eSIM API - Roamify"}/>
             <meta
                 property="og:description"
-                content={"Roamify API Documentation made with Nextra, empowering you to create a travel business at scale."}
+                content={"Best eSIM API for travel businesses. Roamify API is a robust platform that enables you to create a travel business at scale."}
             />
             <meta property="og:url" content="https://docs.getroamify.com"/>
-            <meta property="og:site_name" content="Roamify"/>
+            <meta property="og:site_name" content="eSIM API - Roamify"/>
             <meta
                 property="description"
-                content={"Roamify API Documentation made with Nextra, empowering you to create a travel business at scale."}
+                content={"Best eSIM API for travel businesses. Roamify API is a robust platform that enables you to create a travel business at scale."}
             />
-            <title>Roamify API</title>
+            <title>
+                eSIM API - Roamify
+            </title>
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:creator" content="@roamifyhq"/>
         </>
