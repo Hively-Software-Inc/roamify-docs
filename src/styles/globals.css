@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import 'nextra-theme-docs/style.css';
+
+:root {
+}
+
+body {
+    font-family: "Inter var", system-ui, sans-serif;
+}
