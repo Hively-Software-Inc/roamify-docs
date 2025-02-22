@@ -1,11 +1,14 @@
 import { Tabs } from 'nextra/components';
 
-# Compatible Devices
+## On this page
+- [eSIM Compatible Devices](#eSIM-Compatible-Devices)
+
+## eSIM Compatible Devices
 To get a list of compatible devices, you need to send a `GET` request to the `/api/compatible-devices` endpoint.
 
 There are no required parameters for this endpoint.
 
-## Example
+## Usage - fetch a list of eSIM compatible devices
 Here is an example of how you can get a list of compatible devices using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -23,7 +26,7 @@ Here is an example of how you can get a list of compatible devices using Roamify
 
         axios.get('https://api-dev.getroamify.com/api/compatible-devices', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

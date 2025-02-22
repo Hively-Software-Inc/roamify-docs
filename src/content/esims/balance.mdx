@@ -1,11 +1,14 @@
 import { Tabs } from 'nextra/components';
 
-# Balance
+## On this page
+- [Account Balance](#account-balance)
+
+## Account Balance
 To get the remaining balance of your funds, you need to send a `GET` request to the `/api/balance` endpoint.
 
 There are no required parameters for this endpoint.
 
-## Example
+## Usage - fetch account balance
 Here is an example of how you can get the remaining balance of your funds using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -23,7 +26,7 @@ Here is an example of how you can get the remaining balance of your funds using 
 
         axios.get('https://api-dev.getroamify.com/api/balance', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

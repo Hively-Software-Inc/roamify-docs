@@ -1,6 +1,10 @@
 import { Tabs } from 'nextra/components';
 
-# Orders
+## On this page
+- [Create eSIM Order](#create-esim-order)
+- [Create Top-up Order](#create-top-up-order)
+- [Get eSIM Order](#get-esim-order)
+- [Get eSIM Orders](#get-esim-orders)
 
 ## Create eSIM Order
 To create an eSIM order, you need to send a `POST` request to the `/api/esim/order` endpoint.
@@ -10,7 +14,7 @@ You are required to provide the following parameters in the request body:
   - `packageId`: The ID of the eSIM package you want to order. This is a required field of type `string`.
   - `quantity`: The quantity of the eSIM package you want to order. This is a required field of type `number`.
 
-### Example
+### Usage - create an eSIM order
 Here is an example of how you can create an eSIM order using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -43,7 +47,7 @@ Here is an example of how you can create an eSIM order using Roamify eSIM API.
             ]
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -92,7 +96,7 @@ You are required to provide the following parameters in the request body:
 - `iccid`: The ICCID of the eSIM you want to top-up. This is a required field of type `string`.
 - `packageId`: The ID of the eSIM package you want to top-up. This is a required field of type `string`.
 
-### Example
+### Usage - create a top-up order
 Here is an example of how you can create a top-up order using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -117,7 +121,7 @@ Here is an example of how you can create a top-up order using Roamify eSIM API.
             packageId: 'Package ID'
         }, {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -165,7 +169,7 @@ To get a specific eSIM order, you need to send a `GET` request to the `/api/esim
 You are required to provide the following parameters in the parameters:
 - `orderId`: The ID of the eSIM order you want to retrieve. This is a required field of type `string`.
 
-### Example
+### Usage - fetch an eSIM order
 Here is an example of how you can get a specific eSIM order using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -183,7 +187,7 @@ Here is an example of how you can get a specific eSIM order using Roamify eSIM A
 
         axios.get('https://api-dev.getroamify.com/api/esim/order?orderId=Order ID', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
@@ -239,7 +243,7 @@ There are no required parameters for this endpoint, but you can provide the foll
 
 - `limit`: The number of eSIM orders to return. This is an optional field of type `number`. The default value is `50`.
 
-### Example
+### Usage - fetch a list of eSIM orders
 Here is an example of how you can get a list of eSIM orders using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -257,7 +261,7 @@ Here is an example of how you can get a list of eSIM orders using Roamify eSIM A
 
         axios.get('https://api-dev.getroamify.com/api/esim/orders?status=PENDING&limit=10', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })

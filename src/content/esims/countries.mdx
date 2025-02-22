@@ -1,11 +1,14 @@
 import { Tabs } from 'nextra/components';
 
-# Countries
+## On this page
+- [Countries](#countries)
+
+## Countries
 To get a list of countries, you need to send a `GET` request to the `/api/esim/countries` endpoint.
 
 There are no required parameters for this endpoint.
 
-## Example
+## Usage - fetch a list of eSIM supported countries
 Here is an example of how you can get a list of countries using Roamify eSIM API.
 
 <Tabs items={['curl', 'javascript']}>
@@ -23,7 +26,7 @@ Here is an example of how you can get a list of countries using Roamify eSIM API
 
         axios.get('https://api-dev.getroamify.com/api/ /countries', {
             headers: {
-                'Authorization': 'Bearer Access Token',
+                'Authorization': 'Bearer {access token here}',
                 'Content-Type': 'application/json'
             }
         })
