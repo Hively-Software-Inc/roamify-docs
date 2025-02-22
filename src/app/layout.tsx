@@ -96,22 +96,11 @@ const footer = (
 export default async function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html
-            // Not required, but good for SEO
             lang="en"
-            // Required to be set
             dir="ltr"
-            // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
             suppressHydrationWarning
         >
         <Head
-            backgroundColor={{
-                dark: 'rgb(15, 23, 42)',
-                light: 'rgb(254, 252, 232)'
-            }}
-            color={{
-                hue: {dark: 120, light: 0},
-                saturation: {dark: 100, light: 100}
-            }}
         >
             {/* Your additional tags should be passed as `children` of `<Head>` element */}
         </Head>
@@ -127,6 +116,10 @@ export default async function RootLayout({children}: { children: React.ReactNode
             sidebar={{
                 defaultMenuCollapseLevel: 1,
                 toggleButton: true,
+            }}
+            navigation={{
+                prev: true,
+                next: true,
             }}
             docsRepositoryBase={"https://github.com/Hively-Software-Inc/roamify-docs"}
             footer={footer}
