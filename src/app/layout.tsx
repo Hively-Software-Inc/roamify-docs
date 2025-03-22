@@ -53,7 +53,10 @@ export const metadata = {
     category: "eSIM API",
     creator: "Roamify - eSIM Phone & Internet",
     publisher: "Roamify - eSIM Phone & Internet",
-    title: 'eSIM API - Roamify',
+    title: {
+        default: 'eSIM API - Roamify',
+        template: '%s | Roamify'
+    },
     description: 'Best eSIM API for travel businesses. Roamify API is a robust platform that enables you to create a travel business at scale.',
     openGraph: {
         type: 'website',
@@ -102,7 +105,7 @@ const search = <Search
 export default async function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html
-            lang="en"
+            lang="en-US"
             dir="ltr"
             suppressHydrationWarning
         >
