@@ -1,4 +1,6 @@
-import { Tabs } from 'nextra/components';
+import { Tabs, Callout } from 'nextra/components';
+
+# eSIMs API
 
 ## Table of Contents
 - [Generate eSIM Profile](#generate-esim-profile)
@@ -6,13 +8,22 @@ import { Tabs } from 'nextra/components';
 - [Get eSIM Usage Details](#get-esim-usage-details)
 - [Get eSIM Compatible Top-ups](#get-esim-compatible-top-ups)
 - [Get eSIM Packages History](#get-esim-packages-history)
-- [Get eSIM](#get-esim)
+- [Get eSIM By ICCID](#get-esim-by-iccid)
+- [Get eSIM By eSIMID](#get-esims-by-esimid)
 - [Get eSIMs List](#get-esims-list)
 
 ## Generate eSIM Profile
 After you placed an order for eSIMs, you will get a dedicated ID called `esimId` for each eSIM. You can use this ID to generate a eSIM profile and ready to be used by your customers.
 
 To apply an eSIM profile, you need to send a `POST` request to the `/api/esim/apply` endpoint.
+
+<Callout type="warning" emoji="⚠️">
+    Due to server load, the eSIM profile generation can take up to 90 seconds. Please make sure the timeout of your request is set to at least 90 seconds.
+</Callout>
+<Callout type="error" emoji="🚫" className="my-4">
+    If your request times out or failed with a error message stating: "eSIM is still pending processing",
+    please send a follow up request to /esim?esimId=YOUR_ESIM_ID to retrieve the eSIM.
+</Callout>
 
 The request body should contain the following parameters:
 - `esimId`: The ID of the eSIM. This is a required field of type `string`.
@@ -369,7 +380,7 @@ Here is an example of how you can get a history of eSIM packages applied to an e
 }
 ```
 
-## Get eSIM
+## Get eSIM By ICCID
 To get an eSIM, you need to send a `GET` request to the `/api/esim` endpoint. 
 
 The request body should contain the following parameters:
@@ -403,6 +414,92 @@ Here is an example of how you can get an eSIM using Roamify eSIM API.
         .catch(error => {
             console.error(error);
         });
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Sample Response
+```json
+{
+	"status": "success",
+	"data": {
+		"id": "b06036c5-eadc-4f88-aa31-8c207fec91ec",
+		"iccid": "894000000000029365",
+		"status": "READY",
+		"activation": "first-use",
+		"withTopUp": true,
+		"withHotspot": true,
+		"withDataRoaming": true,
+		"withDestinationInstall": false,
+		"esim": {
+			"lpaCode": "LPA:1$lpa.roamify.com$TEST",
+			"smdpAddress": "lpa.roamify.com",
+			"activationCode": "TEST",
+			"qrCodeUrl": "https://imagedelivery.net/uUE6LNs_ci8SFBH4_n66dQ/partners/b06036c5-eadc-4f88-aa31-8c207fec91ec/iccid/public",
+			"pin": "",
+			"puk": "",
+			"number": "",
+			"iosQuickInstall": "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$lpa.roamify.com$TEST"
+		},
+		"apn": {
+			"apnAutomatic": true,
+			"apnName": "",
+			"apnUsername": "",
+			"apnPassword": ""
+		},
+		"data": {
+			"isUnlimited": false
+		},
+		"call": {
+			"withCall": false,
+			"callType": "all"
+		},
+		"sms": {
+			"withSMS": false,
+			"smsType": "all"
+		},
+		"notes": [],
+		"createdAt": 1731837539,
+		"updatedAt": 1731838043,
+		"expiredAt": 1732442794
+	}
+}
+```
+
+## Get eSIM By eSIMID
+Sometimes the generate eSIM profile request may fail due to server load. In such cases, you can use the eSIM ID to retrieve the eSIM details immediately after the previous request.
+
+The request body should contain the following parameters:
+- `esimId`: The ID of the eSIM. This is a required field of type `string`.
+
+### Usage - fetch an eSIM by eSIM ID
+Here is an example of how you can get an eSIM using Roamify eSIM API.
+
+<Tabs items={['curl', 'javascript']}>
+    <Tabs.Tab index={0}>
+        ```bash
+        curl --request GET \
+        --url 'https://api-dev.getroamify.com/api/esim?esimId=YOUR eSIMID' \
+        --header 'Authorization: Bearer Access Token' \
+        --header 'Content-Type: application/json'
+        ```
+    </Tabs.Tab>
+    <Tabs.Tab index={1}>
+        ```javascript
+        const axios = require('axios');
+
+        axios.get('https://api-dev.getroamify.com/api/esim?esimId=YOUR eSIMID', {
+        headers: {
+        'Authorization': 'Bearer {access token here}',
+        'Content-Type': 'application/json'
+    }
+    })
+        .then(response => {
+        console.log(response.data);
+    })
+        .catch(error => {
+        console.error(error);
+    });
         ```
     </Tabs.Tab>
 </Tabs>
