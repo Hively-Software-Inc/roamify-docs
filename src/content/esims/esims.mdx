@@ -1,6 +1,6 @@
 import { Tabs, Callout } from 'nextra/components';
 
-# eSIMs API
+# eSIM API - Manage eSIMs
 
 ## Table of Contents
 - [Generate eSIM Profile](#generate-esim-profile)
@@ -9,7 +9,7 @@ import { Tabs, Callout } from 'nextra/components';
 - [Get eSIM Compatible Top-ups](#get-esim-compatible-top-ups)
 - [Get eSIM Packages History](#get-esim-packages-history)
 - [Get eSIM By ICCID](#get-esim-by-iccid)
-- [Get eSIM By eSIMID](#get-esims-by-esimid)
+- [Get eSIM By eSIMID](#get-esim-by-esimid)
 - [Get eSIMs List](#get-esims-list)
 
 ## Generate eSIM Profile
@@ -78,6 +78,7 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
 		"withHotspot": true,
 		"withDataRoaming": true,
 		"withDestinationInstall": false,
+		"withUsageCheck": true,
 		"esim": {
 			"lpaCode": "LPA:1$lpa.roamify.com$TEST",
 			"smdpAddress": "lpa.roamify.com",
@@ -115,6 +116,10 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
 
 ## Get eSIM Usage
 To get the usage details of an eSIM, you need to send a `GET` request to the `/api/esim/usage` endpoint.
+
+<Callout type="warning" emoji="⚠️">
+    Watch out property "withUsageCheck", if it is set to false, usage check won't be supported, find instructions in the notes property
+</Callout>
 
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
@@ -173,6 +178,10 @@ Here is an example of how you can get the usage details of an eSIM using Roamify
 
 ## Get eSIM Usage Details
 To get the usage details of an eSIM, you need to send a `GET` request to the `/api/esim/usage/details` endpoint.
+
+<Callout type="warning" emoji="⚠️">
+    Watch out property "withUsageCheck", if it is set to false, usage check won't be supported, find instructions in the notes property
+</Callout>
 
 The parameters required for this endpoint are:
 - `iccid`: The ICCID of the eSIM. This is a required field of type `string`.
@@ -294,6 +303,7 @@ Here is an example of how you can get a list of compatible top-ups for an eSIM u
 			"withHotspot": true,
 			"withDataRoaming": true,
 			"withDestinationInstall": false,
+		    "withUsageCheck": true,
 			"apn": {
 				"apnAutomatic": true,
 				"apnName": "globaldata",
@@ -431,6 +441,7 @@ Here is an example of how you can get an eSIM using Roamify eSIM API.
 		"withHotspot": true,
 		"withDataRoaming": true,
 		"withDestinationInstall": false,
+		"withUsageCheck": true,
 		"esim": {
 			"lpaCode": "LPA:1$lpa.roamify.com$TEST",
 			"smdpAddress": "lpa.roamify.com",
@@ -517,6 +528,7 @@ Here is an example of how you can get an eSIM using Roamify eSIM API.
 		"withHotspot": true,
 		"withDataRoaming": true,
 		"withDestinationInstall": false,
+		"withUsageCheck": true,
 		"esim": {
 			"lpaCode": "LPA:1$lpa.roamify.com$TEST",
 			"smdpAddress": "lpa.roamify.com",
@@ -612,6 +624,7 @@ Here is an example of how you can get a list of eSIMs using Roamify eSIM API.
 			"withHotspot": true,
 			"withDataRoaming": true,
 			"withDestinationInstall": false,
+		    "withUsageCheck": true,
 			"esim": {
 				"lpaCode": "LPA:1$lpa.roamify.com$TEST",
 				"smdpAddress": "lpa.roamify.com",

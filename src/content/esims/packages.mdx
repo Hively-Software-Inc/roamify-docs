@@ -1,12 +1,16 @@
-import { Tabs } from 'nextra/components';
+import { Tabs, Callout } from 'nextra/components';
 
-# eSIM Package(s) API
+# eSIM API - Package(s)
 
 ## Table of Contents
 - [Get eSIM Packages](#get-esim-packages)
 
 ## Ways to get eSIM packages
 To get a list of eSIM packages, you need to send a `GET` request to the `/api/esim/packages` endpoint. 
+
+<Callout type="warning" emoji="⚠️">
+    Watch out property "withUsageCheck", if it is set to false, usage check won't be supported, find instructions in the notes property
+</Callout>
 
 The request body should contain the following parameters:
 - `country`: The country code of the eSIM packages. This is an optional field of type `string`. If you do not provide a country code, the API will return a list of all available eSIM packages. It follows the [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
@@ -168,6 +172,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+		                "withUsageCheck": true,
 						"notes": []
 					},
 					{
@@ -195,6 +200,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+                        "withUsageCheck": true,
 						"notes": []
 					},
 					{
@@ -222,6 +228,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+                        "withUsageCheck": true,
 						"notes": []
 					},
 					{
@@ -249,6 +256,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+                        "withUsageCheck": true,
 						"notes": []
 					},
 					{
@@ -276,6 +284,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+                        "withUsageCheck": true,
 						"notes": []
 					},
 					{
@@ -303,6 +312,7 @@ Here is an example of how you can get a list of eSIM packages using Roamify eSIM
 						"withHotspot": true,
 						"withDataRoaming": true,
 						"withDestinationInstall": false,
+                        "withUsageCheck": true,
 						"notes": []
 					}
 				]
