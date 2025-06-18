@@ -37,6 +37,20 @@ const nextConfig = {
             },
         ];
     },
+    images: {
+        dangerouslyAllowSVG: true,
+        remotePatterns: [
+            { protocol: "https", hostname: "cdn.sanity.io" },
+            { protocol: "https", hostname: "firebasestorage.googleapis.com" },
+            { protocol: "https", hostname: "images.unsplash.com" },
+            { protocol: "https", hostname: "imagedelivery.net" },
+            { protocol: "https", hostname: "cdn.statically.io" },
+            { protocol: "https", hostname: "cdn.jsdelivr.net" },
+            { protocol: "https", hostname: "storage.googleapis.com" },
+            { protocol: "https", hostname: "www.facebook.com" },
+            { protocol: "https", hostname: "www.getroamify.com" },
+        ],
+    },
     devIndicators: {
         buildActivity: true,
         buildActivityPosition: "bottom-right",

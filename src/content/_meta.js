@@ -3,6 +3,7 @@ export default {
   "authentication": "Authentication",
   "esims": "eSIMs Module",
   "gift-cards": "Gift Cards Module",
+  "affiliate": "Affiliate Module",
   "health": "Health Check",
   "about": "About eSIM API",
   "contact": {
