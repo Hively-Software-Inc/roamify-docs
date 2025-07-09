@@ -1,0 +1,76 @@
+# eSIM Usage Event
+
+## Table of Contents
+- [eSIM Usage Event](#esim-usage-event)
+- [Overview](#overview)
+- [Event Payload](#event-payload)
+- [Example Payload](#example-payload)
+
+## Overview
+The eSIM Usage Event webhook sends notifications about eSIM data usage at configurable intervals. This allows you to monitor data consumption and take appropriate actions based on usage patterns.
+
+The event will be triggered for every activated eSIM every 4 hours, and it will also be triggered when data usage reaches the following thresholds:
+- 25% of the total data allocation
+- 50% of the total data allocation
+- 75% of the total data allocation
+- 90% of the total data allocation
+- 100% of the total data allocation
+
+
+## Event Payload
+The webhook payload contains the following fields:
+
+- `event_category`: The category of event. For esim events, this will be `esim`.
+- `event_type`: The type of event. For esim usage events, this will be `usage`.
+- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+- `iccid`: The Integrated Circuit Card Identifier of the eSIM.
+- `esim_id`: The unique identifier of the eSIM (UUID format).
+- `reference_id`: A custom referenceId provided by the user when creating the order if applicable.
+- `start`: The start time of the usage period, in unix timestamp format (seconds since epoch).
+- `end`: The end time of the usage period, in unix timestamp format (seconds since epoch).
+- `status`: The status of the eSIM usage event. Possible values include:
+  - `NEW`: The eSIM is newly generated and not yet installed.
+  - `INSTALLED`: The eSIM has been installed on a device.
+  - `ACTIVATED`: The eSIM has been activated and is currently in use.
+  - `INACTIVE`: The eSIM is inactive and not currently in use.
+  - `REVOKED`: The eSIM has been revoked and is no longer valid.
+  - `EXPIRED`: The eSIM has expired and is no longer valid.
+  - `UNKNOWN`: The status of the eSIM is unknown or not specified.
+- `package_id`: The unique identifier of the eSIM package.
+- `package_name`: The name of the eSIM package.
+- `usage_data`: Object containing usage information:
+  - `isUnlimited`: Indicates whether the data allocation is unlimited (true/false).
+  - `allowed_data`: The total data allocation in megabytes (MB).
+  - `remaining_data`: The remaining data allocation in megabytes (MB).
+  - `allowed_sms`: The total SMS allocation.
+  - `remaining_sms`: The remaining SMS allocation.
+  - `allowed_voice`: The total voice allocation in minutes.
+  - `remaining_voice`: The remaining voice allocation in minutes.
+
+## Example Payload
+Here is an example of the eSIM Usage Event webhook payload:
+
+```json
+{
+  "event_category": "esim",
+  "event_type": "usage",
+  "timestamp": 1700000000,
+  "iccid": "8991234567890123456",
+  "esim_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
+  "reference_id": "ref_1234567890",
+  "start": 1699996800,
+  "end": 1700000400,
+  "status": "ACTIVATED",
+  "package_id": "esim-afghanistan-7days-1gb-all",
+  "package_name": "1 GB - 7 Days",
+  "usage_data": {
+     "isUnlimited": false,
+     "allowed_data": 1024,
+     "remaining_data": 512,
+     "allowed_sms": 100,
+     "remaining_sms": 50,
+     "allowed_voice": 500,
+     "remaining_voice": 250
+  }
+}
+```

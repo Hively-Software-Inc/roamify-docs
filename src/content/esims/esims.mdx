@@ -13,10 +13,16 @@ import { Tabs, Callout } from 'nextra/components';
 - [Get eSIMs List](#get-esims-list)
 
 ## Generate eSIM Profile
-After you placed an order for eSIMs, you will get a dedicated ID called `esimId` for each eSIM. You can use this ID to generate a eSIM profile and ready to be used by your customers.
+After you placed an order for eSIMs, you will get a dedicated ID called `esimId` for each eSIM.You can use this ID to generate a eSIM profile and ready to be used by your customers.
+
+Alternatively, if you placed an order with `referenceId`, you can use this ID to bulk generate eSIM profiles for all eSIMs in the order.
 
 To apply an eSIM profile, you need to send a `POST` request to the `/api/esim/apply` endpoint.
 
+<Callout type="warning" emoji="⚠️">
+    If you created an order with `referenceId`, you can use the `referenceId` to generate eSIM profiles for all eSIMs in the order.
+    You can use the `esimId` to generate a single eSIM profile.
+</Callout>
 <Callout type="warning" emoji="⚠️">
     Due to server load, the eSIM profile generation can take up to 90 seconds. Please make sure the timeout of your request is set to at least 90 seconds.
 </Callout>
@@ -27,6 +33,7 @@ To apply an eSIM profile, you need to send a `POST` request to the `/api/esim/ap
 
 The request body should contain the following parameters:
 - `esimId`: The ID of the eSIM. This is a required field of type `string`.
+- `referenceId`: The reference ID of the eSIM order. This is an optional field of type `string`. If you do not provide a reference ID, the API will generate a single eSIM profile for the provided `esimId`.
 
 ### Usage - generate eSIM profile
 Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
@@ -65,7 +72,7 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
     </Tabs.Tab>
 </Tabs>
 
-### Sample Response
+### Sample Response with esimId
 ```json
 {
 	"status": "success",
@@ -111,6 +118,56 @@ Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
 		"updatedAt": 1731837987,
 		"expiredAt": 1763373985
 	}
+}
+```
+### Sample Response with referenceId (array of eSIMs)
+```json
+{
+	"status": "success",
+	"data": [
+      {
+        "id": "b06036c5-eadc-4f88-aa31-8c207fec91ec",
+        "iccid": "894000000000029365",
+        "status": "READY",
+        "activation": "first-use",
+        "withTopUp": true,
+        "withHotspot": true,
+        "withDataRoaming": true,
+        "withDestinationInstall": false,
+        "withUsageCheck": true,
+        "esim": {
+            "lpaCode": "LPA:1$lpa.roamify.com$TEST",
+            "smdpAddress": "lpa.roamify.com",
+            "activationCode": "TEST",
+            "qrCodeUrl": "https://imagedelivery.net/uUE6LNs_ci8SFBH4_n66dQ/partners/b06036c5-eadc-4f88-aa31-8c207fec91ec/iccid/public",
+            "pin": "",
+            "puk": "",
+            "number": "",
+            "iosQuickInstall": "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$lpa.roamify.com$TEST"
+        },
+        "apn": {
+            "apnAutomatic": true,
+            "apnName": "",
+            "apnUsername": "",
+            "apnPassword": ""
+        },
+        "data": {
+            "isUnlimited": false
+        },
+        "call": {
+            "withCall": false,
+            "callType": "all"
+        },
+        "sms": {
+            "withSMS": false,
+            "smsType": "all"
+        },
+        "notes": [],
+        "createdAt": 1731837539,
+        "updatedAt": 1731837987,
+        "expiredAt": 1763373985
+      }
+	]
 }
 ```
 
@@ -577,6 +634,7 @@ There are no required parameters for this endpoint, but you can provide the foll
   - `UNKNOWN`: Unknown status
 
 - `limit`: The number of eSIM orders to return. This is an optional field of type `number`. The default value is `50`.
+- `referenceId`: The reference ID of the eSIM. This is an optional field of type `string`. It can be used to filter the eSIMs by reference ID.
 
 ### Usage - fetch a list of eSIMs
 Here is an example of how you can get a list of eSIMs using Roamify eSIM API.

@@ -1,0 +1,49 @@
+import { Tabs } from 'nextra/components';
+
+# eSIM Status Event
+
+## Table of Contents
+- [eSIM Status Event](#esim-status-event)
+- [Overview](#overview)
+- [Event Payload](#event-payload)
+- [Example Payload](#example-payload)
+
+## Overview
+The eSIM Status Event webhook sends notifications when an eSIM's status changes. This allows you to monitor and respond to status transitions such as activation, deactivation, suspension, or other state changes.
+
+## Event Payload
+The webhook payload contains the following fields:
+
+- `event_category`: The category of event. For esim events, this will be `esim`.
+- `event_type`: The type of event. For esim status events, this will be `status`.
+- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+- `iccid`: The Integrated Circuit Card Identifier of the eSIM.
+- `esim_id`: The unique identifier of the eSIM.
+- `reference_id`: A custom referenceId provided by the user when creating the order if applicable.
+- `start`: The start time of the usage period, in unix timestamp format (seconds since epoch).
+- `end`: The end time of the usage period, in unix timestamp format (seconds since epoch).
+- `status`: The status of the eSIM usage event. Possible values include:
+    - `NEW`: The eSIM is newly generated and not yet installed.
+    - `INSTALLED`: The eSIM has been installed on a device.
+    - `ACTIVATED`: The eSIM has been activated and is currently in use.
+    - `INACTIVE`: The eSIM is inactive and not currently in use.
+    - `REVOKED`: The eSIM has been revoked and is no longer valid.
+    - `EXPIRED`: The eSIM has expired and is no longer valid.
+    - `UNKNOWN`: The status of the eSIM is unknown or not specified.
+
+## Example Payload
+Here is an example of the eSIM Status Event webhook payload:
+
+```json
+{
+  "event_category": "esim",
+  "event_type": "status",
+  "timestamp": 1700000000,
+  "iccid": "8991234567890123456",
+  "esim_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
+  "reference_id": "ref_1234567890",
+  "start": 1699996800,
+  "end": 1700000400,
+  "status": "ACTIVATED"
+}
+```

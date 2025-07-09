@@ -1,0 +1,16 @@
+# Roamify Webhooks Overview
+Roamify Webhooks provides a way for API users to receive notifications about various events within the platform.
+Currently, it supports the following features:
+
+- **eSIM Usage**: Receive notifications about eSIM data usage at configurable intervals
+- **eSIM Status**: Receive notifications when an eSIM's status changes (activated, deactivated, suspended, etc.)
+- **eSIM Top-ups**: Receive notifications when an eSIM is topped up with additional data
+- **Partner Balance**: Receive notifications about changes in your partner account balance
+- **Affiliate Orders**: Receive notifications when orders are placed through your affiliate links
+- **More Features**: We are constantly working on adding more features to Roamify Webhooks.
+
+# Mandatory Requirements
+To use Roamify Webhooks, you must meet the following requirements:
+- **HTTPS Endpoint**: Your webhook endpoint must be accessible over HTTPS.
+- **Valid SSL Certificate**: The endpoint must have a valid SSL certificate to ensure secure communication.
+- **Response Handling**: Your endpoint must respond with a 200 OK status code quickly (within 5 seconds) to acknowledge receipt of the webhook prior to any complex processing that may take longer.

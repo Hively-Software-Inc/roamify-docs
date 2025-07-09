@@ -2,6 +2,7 @@ export default {
   "index": "Introduction",
   "authentication": "Authentication",
   "esims": "eSIMs Module",
+  "webhooks": "Webhooks Module",
   "gift-cards": "Gift Cards Module",
   "affiliate": "Affiliate Module",
   "health": "Health Check",

@@ -12,9 +12,10 @@ import { Tabs } from 'nextra/components';
 To create an eSIM order, you need to send a `POST` request to the `/api/esim/order` endpoint.
 
 You are required to provide the following parameters in the request body:
-- `items`: An array of eSIM items you want to order. Each item should contain the following details:
-  - `packageId`: The ID of the eSIM package you want to order. This is a required field of type `string`.
-  - `quantity`: The quantity of the eSIM package you want to order. This is a required field of type `number`.
+  - `items`: An array of eSIM items you want to order. Each item should contain the following details:
+    - `packageId`: The ID of the eSIM package you want to order. This is a required field of type `string`.
+    - `quantity`: The quantity of the eSIM package you want to order. This is a required field of type `number`.
+  - `referenceId`: The reference ID for the order. This is an optional field of type `string`. (Your custom reference ID for the order, if needed.)
 
 ### Usage - create an eSIM order
 Here is an example of how you can create an eSIM order using Roamify eSIM API.
@@ -32,7 +33,8 @@ Here is an example of how you can create an eSIM order using Roamify eSIM API.
                     "packageId": "Package ID",
                     "quantity": 1
                 }
-            ]
+            ],
+            "referenceId": "Optional Reference ID"
         }'
         ```
     </Tabs.Tab>
@@ -69,6 +71,7 @@ Here is an example of how you can create an eSIM order using Roamify eSIM API.
 	"status": "success",
 	"data": {
 		"id": "67bbabb7-e893-410a-b0a8-4fa62d347b6c",
+        "referenceId": "ref-123456",
 		"orderType": "api",
 		"status": "COMPLETED",
 		"total": 5,
@@ -97,6 +100,7 @@ To create a top-up order, you need to send a `POST` request to the `/api/esim/or
 You are required to provide the following parameters in the request body:
 - `iccid`: The ICCID of the eSIM you want to top-up. This is a required field of type `string`.
 - `packageId`: The ID of the eSIM package you want to top-up. This is a required field of type `string`.
+- `referenceId`: The reference ID for the top-up order. This is an optional field of type `string`. (Your custom reference ID for the order, if needed.)
 
 ### Usage - create a top-up order
 Here is an example of how you can create a top-up order using Roamify eSIM API.
@@ -110,7 +114,8 @@ Here is an example of how you can create a top-up order using Roamify eSIM API.
         --header 'Content-Type: application/json' \
         --data '{
             "iccid": "ICCID",
-            "packageId": "Package ID"
+            "packageId": "Package ID",
+            "referenceId": "Optional Reference ID"
         }'
         ```
     </Tabs.Tab>
@@ -143,6 +148,7 @@ Here is an example of how you can create a top-up order using Roamify eSIM API.
 	"status": "success",
 	"data": {
 		"id": "0501aef3-7cf1-4b4c-a293-c03a6bd7a8ab",
+        "referenceId": "ref-123456",
 		"orderType": "api",
 		"status": "COMPLETED",
 		"total": 5,
@@ -168,8 +174,9 @@ Here is an example of how you can create a top-up order using Roamify eSIM API.
 ## Get eSIM Order
 To get a specific eSIM order, you need to send a `GET` request to the `/api/esim/order` endpoint.
 
-You are required to provide the following parameters in the parameters:
-- `orderId`: The ID of the eSIM order you want to retrieve. This is a required field of type `string`.
+You are required to provide either orderId or referenceId as a query parameter:
+- `orderId`: The ID of the eSIM order you want to retrieve. This is an optional field of type `string`.
+- `referenceId`: The reference ID of the eSIM order you want to retrieve. This is an optional field of type `string`.
 
 ### Usage - fetch an eSIM order
 Here is an example of how you can get a specific eSIM order using Roamify eSIM API.
@@ -209,6 +216,7 @@ Here is an example of how you can get a specific eSIM order using Roamify eSIM A
 	"status": "success",
 	"data": {
 		"id": "67bbabb7-e893-410a-b0a8-4fa62d347b6c",
+        "referenceId": "ref-123456",
 		"orderType": "api",
 		"status": "COMPLETED",
 		"total": 5,
@@ -244,6 +252,7 @@ There are no required parameters for this endpoint, but you can provide the foll
   - `REQUIRE_ACTION`: Orders that require action
 
 - `limit`: The number of eSIM orders to return. This is an optional field of type `number`. The default value is `50`.
+- `referenceId`: The reference ID of the eSIM orders you want to retrieve. This is an optional field of type `string`.
 
 ### Usage - fetch a list of eSIM orders
 Here is an example of how you can get a list of eSIM orders using Roamify eSIM API.
@@ -285,6 +294,7 @@ Here is an example of how you can get a list of eSIM orders using Roamify eSIM A
 		"orders": [
 			{
 				"id": "67bbabb7-e893-410a-b0a8-4fa62d347b6c",
+                "referenceId": "ref-123456",
 				"orderType": "api",
 				"status": "COMPLETED",
 				"total": 5,
