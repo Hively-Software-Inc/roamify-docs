@@ -1,0 +1,62 @@
+import { Tabs } from 'nextra/components';
+
+# Partner Balance Event
+
+## Table of Contents
+- [Partner Balance Event](#partner-balance-event)
+- [Overview](#overview)
+- [Event Payload](#event-payload)
+- [Example Payload](#example-payload)
+
+## Overview
+The Partner Balance Event webhook sends notifications about changes in your partner account balance. This allows you to monitor your account balance in real-time and track transactions that affect your balance.
+
+The `event_type` for these events will be either
+-`low_balance`: this event is triggered when your balance falls below the configured threshold, allowing you to take action to replenish your balance.
+-`insufficient_balance`: this event is triggered when a transaction is attempted that exceeds your current balance, indicating that the balance is insufficient to cover the transaction.
+-`top_up`: this event is triggered when you add funds to your partner account, allowing you to track when your balance is replenished.
+
+The event will be triggered when:
+- Your balance falls below the configured threshold.
+- 75% of the threshold is reached, which can be used to proactively manage your balance.
+- 50% of the threshold is reached, allowing you to take action before reaching the critical low balance.
+- 25% of the threshold is reached, which can be useful for early warnings.
+- A transaction is attempted that exceeds your current balance, resulting in an insufficient balance event.
+- Funds are added to your partner account, resulting in a top-up event.
+
+## Event Payload
+The webhook payload contains the following fields:
+
+- `event_category`: The category of event. For partner events, this will be `partner`.
+- `event_type`: The type of event. For partner balance events, this will be any of `low_balance` or `insufficient_balance` or `top_up`.
+- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+- `balance`: The currency balance amount.
+- `threshold`: The threshold amount that triggered the event, if applicable.
+- `threshold_percentage`: The percentage of the threshold relative to the total balance, if applicable.
+- `currency`: The currency of the balance, in ISO 4217 format (e.g., USD, EUR).
+
+### Example Payload
+Here is an example of the Partner Balance Event webhook payload:
+
+```json
+{
+  "event_type": "low_balance",
+  "event_category": "partner",
+  "timestamp": 1673123456,
+  "balance": 50.00,
+  "threshold": 100.00,
+  "threshold_percentage": 50,
+  "currency": "USD"
+}
+```
+
+## Mandatory Response
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+
+### Response Example
+```json
+{
+  "code": 200,
+  "status": "success"
+}
+```
