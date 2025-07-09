@@ -1,3 +1,5 @@
+import {Callout, Tabs} from 'nextra/components';
+
 # eSIM Usage Event
 
 ## Table of Contents
@@ -38,7 +40,10 @@ The webhook payload contains the following fields:
   - `UNKNOWN`: The status of the eSIM is unknown or not specified.
 - `package_id`: The unique identifier of the eSIM package.
 - `package_name`: The name of the eSIM package.
-- `usage_data`: Object containing usage information:
+- `data_units`: The units used for data allocation, typically "MB" (megabytes).
+- `voice_units`: The units used for voice allocation, typically "minutes".
+- `sms_units`: The units used for SMS allocation, typically "sms".
+- `usage_data`: Object containing usage data, which includes:
   - `isUnlimited`: Indicates whether the data allocation is unlimited (true/false).
   - `allowed_data`: The total data allocation in megabytes (MB).
   - `remaining_data`: The remaining data allocation in megabytes (MB).
@@ -46,8 +51,12 @@ The webhook payload contains the following fields:
   - `remaining_sms`: The remaining SMS allocation.
   - `allowed_voice`: The total voice allocation in minutes.
   - `remaining_voice`: The remaining voice allocation in minutes.
+- `usage_list`: An array of usage records, each containing:
+  - `date`: The date of the usage record in ISO 8601 format (YYYY-MM-DD).
+  - `data_used`: The amount of data used in megabytes (MB).
+  - `location`: The location where the usage occurred, represented as a string (e.g., "Afghanistan").
 
-## Example Payload
+### Example Payload
 Here is an example of the eSIM Usage Event webhook payload:
 
 ```json
@@ -63,6 +72,9 @@ Here is an example of the eSIM Usage Event webhook payload:
   "status": "ACTIVATED",
   "package_id": "esim-afghanistan-7days-1gb-all",
   "package_name": "1 GB - 7 Days",
+  "data_units": "MB",
+  "voice_units": "minutes",
+  "sms_units": "sms",
   "usage_data": {
      "isUnlimited": false,
      "allowed_data": 1024,
@@ -71,6 +83,29 @@ Here is an example of the eSIM Usage Event webhook payload:
      "remaining_sms": 50,
      "allowed_voice": 500,
      "remaining_voice": 250
-  }
+  },
+    "usage_list": [
+        {
+          "date": "2023-11-01",
+          "data_used": 100,
+          "location": "Afghanistan"
+        },
+        {
+          "date": "2023-11-02",
+          "data_used": 200,
+          "location": "Afghanistan"
+        }
+    ]
+}
+```
+
+## Mandatory Response
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+
+### Response Example
+```json
+{
+  "code": 200,
+  "status": "success"
 }
 ```

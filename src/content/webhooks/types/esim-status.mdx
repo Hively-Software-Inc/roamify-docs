@@ -31,7 +31,7 @@ The webhook payload contains the following fields:
     - `EXPIRED`: The eSIM has expired and is no longer valid.
     - `UNKNOWN`: The status of the eSIM is unknown or not specified.
 
-## Example Payload
+### Example Payload
 Here is an example of the eSIM Status Event webhook payload:
 
 ```json
@@ -45,5 +45,16 @@ Here is an example of the eSIM Status Event webhook payload:
   "start": 1699996800,
   "end": 1700000400,
   "status": "ACTIVATED"
+}
+```
+
+## Mandatory Response
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+
+### Response Example
+```json
+{
+  "code": 200,
+  "status": "success"
 }
 ```
