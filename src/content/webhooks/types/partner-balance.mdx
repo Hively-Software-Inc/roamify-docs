@@ -29,11 +29,12 @@ The webhook payload contains the following fields:
 
 - `event_category`: The category of event. For partner events, this will be `partner`.
 - `event_type`: The type of event. For partner balance events, this will be any of `low_balance` or `insufficient_balance` or `top_up`.
-- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
-- `balance`: The currency balance amount.
-- `threshold`: The threshold amount that triggered the event, if applicable.
-- `threshold_percentage`: The percentage of the threshold relative to the total balance, if applicable.
-- `currency`: The currency of the balance, in ISO 4217 format (e.g., USD, EUR).
+- `data`: The data object containing the partner balance information, which includes:
+    - `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+    - `balance`: The currency balance amount.
+    - `threshold`: The threshold amount that triggered the event, if applicable.
+    - `threshold_percentage`: The percentage of the threshold relative to the total balance, if applicable.
+    - `currency`: The currency of the balance, in ISO 4217 format (e.g., USD, EUR).
 
 ### Example Payload
 Here is an example of the Partner Balance Event webhook payload:
@@ -42,11 +43,13 @@ Here is an example of the Partner Balance Event webhook payload:
 {
   "event_type": "low_balance",
   "event_category": "partner",
-  "timestamp": 1673123456,
-  "balance": 50.00,
-  "threshold": 100.00,
-  "threshold_percentage": 50,
-  "currency": "USD"
+  "data": {
+      "timestamp": 1673123456,
+      "balance": 50.00,
+      "threshold": 100.00,
+      "threshold_percentage": 50,
+      "currency": "USD"
+  }
 }
 ```
 
