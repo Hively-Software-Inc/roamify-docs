@@ -1,4 +1,4 @@
-import {Callout, Tabs} from 'nextra/components';
+import {Callout} from 'nextra/components';
 
 # eSIM Usage Event
 
@@ -7,6 +7,10 @@ import {Callout, Tabs} from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the eSIM usage event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The eSIM Usage Event webhook sends notifications about eSIM data usage at configurable intervals. This allows you to monitor data consumption and take appropriate actions based on usage patterns.
@@ -24,37 +28,39 @@ The webhook payload contains the following fields:
 
 - `event_category`: The category of event. For esim events, this will be `esim`.
 - `event_type`: The type of event. For esim usage events, this will be `usage`.
-- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
-- `iccid`: The Integrated Circuit Card Identifier of the eSIM.
-- `esim_id`: The unique identifier of the eSIM (UUID format).
-- `reference_id`: A custom referenceId provided by the user when creating the order if applicable.
-- `start`: The start time of the usage period, in unix timestamp format (seconds since epoch).
-- `end`: The end time of the usage period, in unix timestamp format (seconds since epoch).
-- `status`: The status of the eSIM usage event. Possible values include:
-  - `NEW`: The eSIM is newly generated and not yet installed.
-  - `INSTALLED`: The eSIM has been installed on a device.
-  - `ACTIVATED`: The eSIM has been activated and is currently in use.
-  - `INACTIVE`: The eSIM is inactive and not currently in use.
-  - `REVOKED`: The eSIM has been revoked and is no longer valid.
-  - `EXPIRED`: The eSIM has expired and is no longer valid.
-  - `UNKNOWN`: The status of the eSIM is unknown or not specified.
-- `package_id`: The unique identifier of the eSIM package.
-- `package_name`: The name of the eSIM package.
-- `data_units`: The units used for data allocation, typically "MB" (megabytes).
-- `voice_units`: The units used for voice allocation, typically "minutes".
-- `sms_units`: The units used for SMS allocation, typically "sms".
-- `usage_data`: Object containing usage data, which includes:
-  - `isUnlimited`: Indicates whether the data allocation is unlimited (true/false).
-  - `allowed_data`: The total data allocation in megabytes (MB).
-  - `remaining_data`: The remaining data allocation in megabytes (MB).
-  - `allowed_sms`: The total SMS allocation.
-  - `remaining_sms`: The remaining SMS allocation.
-  - `allowed_voice`: The total voice allocation in minutes.
-  - `remaining_voice`: The remaining voice allocation in minutes.
-- `usage_list`: An array of usage records, each containing:
-  - `date`: The date of the usage record in ISO 8601 format (YYYY-MM-DD).
-  - `data_used`: The amount of data used in megabytes (MB).
-  - `location`: The location where the usage occurred, represented as a string (e.g., "Afghanistan").
+- `data`: The data object containing the eSIM usage information, which includes:
+    - `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+    - `iccid`: The Integrated Circuit Card Identifier of the eSIM.
+    - `esim_id`: The unique identifier of the eSIM (UUID format).
+    - `reference_id`: A custom referenceId provided by the user when creating the order if applicable.
+    - `start`: The start time of the usage period, in unix timestamp format (seconds since epoch).
+    - `end`: The end time of the usage period, in unix timestamp format (seconds since epoch).
+    - `status`: The status of the eSIM usage event. Possible values include:
+        - `NEW`: The eSIM is newly generated and not yet installed.
+        - `INSTALLED`: The eSIM has been installed on a device.
+        - `ACTIVATED`: The eSIM has been activated and is currently in use.
+        - `INACTIVE`: The eSIM is inactive and not currently in use.
+        - `DELETED`: The eSIM has been deleted from the device.
+        - `REVOKED`: The eSIM has been revoked and is no longer valid.
+        - `EXPIRED`: The eSIM has expired and is no longer valid.
+        - `UNKNOWN`: The status of the eSIM is unknown or not specified.
+    - `package_id`: The unique identifier of the eSIM package.
+    - `package_name`: The name of the eSIM package.
+    - `data_units`: The units used for data allocation, typically "MB" (megabytes).
+    - `voice_units`: The units used for voice allocation, typically "minutes".
+    - `sms_units`: The units used for SMS allocation, typically "sms".
+    - `usage_data`: Object containing usage data, which includes:
+    - `isUnlimited`: Indicates whether the data allocation is unlimited (true/false).
+    - `allowed_data`: The total data allocation in megabytes (MB).
+    - `remaining_data`: The remaining data allocation in megabytes (MB).
+    - `allowed_sms`: The total SMS allocation.
+    - `remaining_sms`: The remaining SMS allocation.
+    - `allowed_voice`: The total voice allocation in minutes.
+    - `remaining_voice`: The remaining voice allocation in minutes.
+    - `usage_list`: An array of usage records, each containing:
+    - `date`: The date of the usage record in ISO 8601 format (YYYY-MM-DD).
+    - `data_used`: The amount of data used in megabytes (MB).
+    - `location`: The location where the usage occurred, represented as a string (e.g., "Afghanistan").
 
 ### Example Payload
 Here is an example of the eSIM Usage Event webhook payload:
@@ -63,44 +69,47 @@ Here is an example of the eSIM Usage Event webhook payload:
 {
   "event_category": "esim",
   "event_type": "usage",
-  "timestamp": 1700000000,
-  "iccid": "8991234567890123456",
-  "esim_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
-  "reference_id": "ref_1234567890",
-  "start": 1699996800,
-  "end": 1700000400,
-  "status": "ACTIVATED",
-  "package_id": "esim-afghanistan-7days-1gb-all",
-  "package_name": "1 GB - 7 Days",
-  "data_units": "MB",
-  "voice_units": "minutes",
-  "sms_units": "sms",
-  "usage_data": {
-     "isUnlimited": false,
-     "allowed_data": 1024,
-     "remaining_data": 512,
-     "allowed_sms": 100,
-     "remaining_sms": 50,
-     "allowed_voice": 500,
-     "remaining_voice": 250
-  },
-    "usage_list": [
-        {
-          "date": "2023-11-01",
-          "data_used": 100,
-          "location": "Afghanistan"
-        },
-        {
-          "date": "2023-11-02",
-          "data_used": 200,
-          "location": "Afghanistan"
-        }
-    ]
+  "data": {
+      "timestamp": 1700000000,
+      "iccid": "8991234567890123456",
+      "esim_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
+      "reference_id": "ref_1234567890",
+      "start": 1699996800,
+      "end": 1700000400,
+      "status": "ACTIVATED",
+      "package_id": "esim-afghanistan-7days-1gb-all",
+      "package_name": "1 GB - 7 Days",
+      "data_units": "MB",
+      "voice_units": "minutes",
+      "sms_units": "sms",
+      "usage_data": {
+         "isUnlimited": false,
+         "allowed_data": 1024,
+         "remaining_data": 512,
+         "allowed_sms": 100,
+         "remaining_sms": 50,
+         "allowed_voice": 500,
+         "remaining_voice": 250
+      },
+        "usage_list": [
+            {
+              "date": "2023-11-01",
+              "data_used": 100,
+              "location": "Afghanistan"
+            },
+            {
+              "date": "2023-11-02",
+              "data_used": 200,
+              "location": "Afghanistan"
+            }
+        ]
+  }
 }
 ```
 
 ## Mandatory Response
-You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. We recommend responding quickly (within 3 seconds) to avoid overloading Roamify's webhook server.
+We recommend you send response first and then process the webhook data in the background to ensure that you do not miss any webhook events due to processing delays.
 
 ### Response Example
 ```json

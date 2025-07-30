@@ -2,7 +2,7 @@ import {  Tabs } from 'nextra/components';
 
 # Auth with Roamify API
 
-We are using OAuth 2.0 for authentication. To authenticate with Roamify eSIM API, you need to follow the steps below.
+We are using Bearer Token Authentication for Roamify API. This means that you need to include your Access Token in the `Authorization` header of your requests to Roamify API.
 
 ## Table of Contents
 - [Auth with Roamify API](#auth-with-roamify-api)
@@ -12,11 +12,11 @@ We are using OAuth 2.0 for authentication. To authenticate with Roamify eSIM API
 - [Usage - how to use your Access Token](#usage---how-to-use-your-access-token)
 
 ## Authentication Flow
-1. **Get Access Token**: Retrieve your Access Token from [Roamify Partner Portal](https://partner.getroamify.com/sign-in).
+1. **Get Access Token**: Retrieve your Access Token (called API Key in the portal) from [Roamify Partner Portal](https://partner.getroamify.com/sign-in).
 2. **Use Access Token**: Use the Access Token to make requests to Roamify eSIM API by including it in the `Authorization` header as a `Bearer` token.
 
 ## Access Token
-Your Access Token is a long-lived token that you can use to make requests to Roamify eSIM API. It is recommended that you store your Access Token securely and refresh it when it expires.
+Your Access Token is a long-lived token that you can use to make requests to Roamify eSIM API. You never need to refresh it, as it does not expire.
 
 ## Refresh Token
 You can refresh your Access Token in the Roamify Partner Portal, under the `API Keys` section. Upon refreshing your Access Token, your old Access Token will be invalidated.

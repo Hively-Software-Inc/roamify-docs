@@ -1,6 +1,6 @@
 export default {
-    "esim-usage": "eSIM Usage",
     "esim-status": "eSIM Status",
+    "esim-usage": "eSIM Usage",
     "partner-balance": "Partner Balance",
     "affiliate-orders": "Affiliate Orders",
 }

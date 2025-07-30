@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import {Callout} from 'nextra/components';
 
 # Partner Balance Event
 
@@ -7,6 +7,10 @@ import { Tabs } from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the partner balance event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The Partner Balance Event webhook sends notifications about changes in your partner account balance. This allows you to monitor your account balance in real-time and track transactions that affect your balance.
@@ -29,11 +33,12 @@ The webhook payload contains the following fields:
 
 - `event_category`: The category of event. For partner events, this will be `partner`.
 - `event_type`: The type of event. For partner balance events, this will be any of `low_balance` or `insufficient_balance` or `top_up`.
-- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
-- `balance`: The currency balance amount.
-- `threshold`: The threshold amount that triggered the event, if applicable.
-- `threshold_percentage`: The percentage of the threshold relative to the total balance, if applicable.
-- `currency`: The currency of the balance, in ISO 4217 format (e.g., USD, EUR).
+- `data`: The data object containing the partner balance information, which includes:
+    - `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+    - `balance`: The currency balance amount.
+    - `threshold`: The threshold amount that triggered the event, if applicable.
+    - `threshold_percentage`: The percentage of the threshold relative to the total balance, if applicable.
+    - `currency`: The currency of the balance, in ISO 4217 format (e.g., USD, EUR).
 
 ### Example Payload
 Here is an example of the Partner Balance Event webhook payload:
@@ -42,16 +47,19 @@ Here is an example of the Partner Balance Event webhook payload:
 {
   "event_type": "low_balance",
   "event_category": "partner",
-  "timestamp": 1673123456,
-  "balance": 50.00,
-  "threshold": 100.00,
-  "threshold_percentage": 50,
-  "currency": "USD"
+  "data": {
+      "timestamp": 1673123456,
+      "balance": 50.00,
+      "threshold": 100.00,
+      "threshold_percentage": 50,
+      "currency": "USD"
+  }
 }
 ```
 
 ## Mandatory Response
-You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. We recommend responding quickly (within 3 seconds) to avoid overloading Roamify's webhook server.
+We recommend you send response first and then process the webhook data in the background to ensure that you do not miss any webhook events due to processing delays.
 
 ### Response Example
 ```json

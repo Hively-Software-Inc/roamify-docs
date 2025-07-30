@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import {Callout, Tabs} from 'nextra/components';
 
 # Affiliate Orders Event
 
@@ -8,6 +8,10 @@ import { Tabs } from 'nextra/components';
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
 
+<Callout type="warning" emoji="⚠️">
+    Before you start using the affiliate orders event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
+
 ## Overview
 The Affiliate Orders Event webhook sends notifications when orders are placed through your affiliate links. This allows you to track conversions, monitor affiliate performance, and calculate commissions in real-time.
 
@@ -16,28 +20,29 @@ The webhook payload contains the following fields:
 
 - `event_category`: The category of event. For affiliate events, this will be `affiliate`.
 - `event_type`: The type of event. For affiliate order events, this will be `order`.
-- `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
-- `partner_name`: The name of the affiliate partner.
-- `partner_id`: The unique identifier of the affiliate account.
-- `commission_rate`: The commission rate for the order, expressed as a percentage.
-- `commission_amount`: The total commission amount earned from the order.
-- `order_data`: Object containing order information:
-  - `order_id`: The unique identifier of the order.
-  - `order_total`: The total amount of the order.
-  - `order_adjustment`: The adjusted total amount of the order after any redeemable credits or adjustments.
-  - `order_subtotal`: The subtotal amount of the order before any discounts.
-  - `order_discount`: The discount applied to the order, if any.
-  - `order_currency`: The currency of the order, in ISO 4217 format (e.g., USD, EUR).
-  - `order_status`: The status of the order. Possible values include:
-    - `completed`: The order has been completed successfully.
-    - `pending`: The order is pending processing.
-    - `failed`: The order has failed.
-    - `refunded`: The order has been refunded.
-  - `order_items`: Array of items included in the order, each containing:
-    - `item_id`: The unique identifier of the item.
-    - `item_name`: The name of the item.
-    - `item_quantity`: The quantity of the item ordered.
-    - `item_price`: The price of the item in USD.
+- `data`: The data object containing the affiliate order information, which includes:
+    - `timestamp`: The time when the event was triggered, in unix timestamp format (seconds since epoch).
+    - `partner_name`: The name of the affiliate partner.
+    - `partner_id`: The unique identifier of the affiliate account.
+    - `commission_rate`: The commission rate for the order, expressed as a percentage.
+    - `commission_amount`: The total commission amount earned from the order.
+    - `order_data`: Object containing order information:
+        - `order_id`: The unique identifier of the order.
+        - `order_total`: The total amount of the order.
+        - `order_adjustment`: The adjusted total amount of the order after any redeemable credits or adjustments.
+        - `order_subtotal`: The subtotal amount of the order before any discounts.
+        - `order_discount`: The discount applied to the order, if any.
+        - `order_currency`: The currency of the order, in ISO 4217 format (e.g., USD, EUR).
+        - `order_status`: The status of the order. Possible values include:
+        - `completed`: The order has been completed successfully.
+        - `pending`: The order is pending processing.
+        - `failed`: The order has failed.
+        - `refunded`: The order has been refunded.
+        - `order_items`: Array of items included in the order, each containing:
+            - `item_id`: The unique identifier of the item.
+            - `item_name`: The name of the item.
+            - `item_quantity`: The quantity of the item ordered.
+            - `item_price`: The price of the item in USD.
 
 ### Example Payload
 Here is an example of the Affiliate Orders Event webhook payload:
@@ -46,33 +51,36 @@ Here is an example of the Affiliate Orders Event webhook payload:
 {
   "event_category": "affiliate",
   "event_type": "order",
-  "timestamp": 1700000000,
-  "partner_name": "ACME Affiliate",
-  "partner_id": "6ImuFenqQbPjYaYyhWRIvkYdsF42",
-  "commission_rate": 10.0,
-  "commission_amount": 5.00,
-  "order_data": {
-    "order_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
-    "order_total": 49.99,
-    "order_adjustment": 0.00,
-    "order_subtotal": 49.99,
-    "order_discount": 0.00,
-    "order_currency": "USD",
-    "order_status": "completed",
-    "order_items": [
-      {
-        "item_id": "esim-afghanistan-7days-1gb-all",
-        "item_name": "1 GB - 7 Days",
-        "item_quantity": 1,
-        "item_price": 49.99
+  "data": {
+      "timestamp": 1700000000,
+      "partner_name": "ACME Affiliate",
+      "partner_id": "6ImuFenqQbPjYaYyhWRIvkYdsF42",
+      "commission_rate": 10.0,
+      "commission_amount": 5.00,
+      "order_data": {
+        "order_id": "c2a9cdae-430e-4251-bf65-a84df4562ed9",
+        "order_total": 49.99,
+        "order_adjustment": 0.00,
+        "order_subtotal": 49.99,
+        "order_discount": 0.00,
+        "order_currency": "USD",
+        "order_status": "completed",
+        "order_items": [
+          {
+            "item_id": "esim-afghanistan-7days-1gb-all",
+            "item_name": "1 GB - 7 Days",
+            "item_quantity": 1,
+            "item_price": 49.99
+          }
+        ]
       }
-    ]
   }
 }
 ```
 
 ## Mandatory Response
-You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. We recommend responding quickly (within 3 seconds) to avoid overloading Roamify's webhook server.
+We recommend you send response first and then process the webhook data in the background to ensure that you do not miss any webhook events due to processing delays.
 
 ### Response Example
 ```json

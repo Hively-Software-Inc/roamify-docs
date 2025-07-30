@@ -1,0 +1,80 @@
+import {Tabs} from "nextra/components";
+
+# Roamify Webhooks Verification
+To ensure the security and reliability of Roamify Webhooks, we require that your webhook endpoint meets specific criteria. This document outlines the verification process and requirements for using Roamify Webhooks.
+Also, this is to protect against unauthorized access and ensure that only legitimate requests are processed.
+
+## Table of Contents
+- [Pre-requisites](#pre-requisites)
+- [Verification Process](#verification-process)
+  - [Sample Verification Code](#sample-verification-code)
+
+## Pre-requisites
+1. **Endpoint Accessibility**: Your webhook endpoint must be accessible over HTTPS. This ensures that all data transmitted between Roamify and your endpoint is encrypted and secure.
+2. **SSL Certificate**: The endpoint must have a valid SSL certificate. This is crucial for establishing trust and ensuring that the data is not tampered with during transmission.
+3. **Response Handling**: Your endpoint must respond with a 200 OK status code quickly (within 2 seconds) to acknowledge receipt of the webhook. This response is essential to confirm that the webhook was received successfully. If your endpoint does not respond within this time frame, Roamify will retry the webhook up to 3 times at increasing intervals.
+
+## Verification Process
+As soon as the request hits your endpoint, you must verify the request to ensure it is coming from Roamify. This verification process includes:
+1. **Signature Verification**: Each webhook request will include a signature in the `X-Roamify-Signature` header. You must verify this signature using your secret key to ensure that the request is legitimate and has not been tampered with.
+
+### Sample Verification Code
+    <Tabs items={['javascript', 'php', 'python']}>
+        <Tabs.Tab index={0}>
+            ```javascript
+            const crypto = require('crypto');
+            const secret = 'your_secret' // Replace with your actual secret key
+            const rawBody = req.rawBody; // The raw body of the request
+            const signature = req.headers['x-roamify-signature']; // The signature from the request
+
+            const computedSignature = crypto
+            .createHmac('sha256', secret)
+            .update(rawBody, 'utf8')
+            .digest('hex');
+
+            if (computedSignature !== signature) {
+            throw new Error('Invalid signature');}
+
+            // process the webhook data here
+            ```
+        </Tabs.Tab>
+        <Tabs.Tab index={1}>
+            ```php
+            $secret = 'your_secret'; // Replace with your actual secret key
+            $rawBody = file_get_contents('php://input'); // The raw body of the request
+            $signature = $_SERVER['HTTP_X_ROAMIFY_SIGNATURE']; // The signature from the request
+
+            $computedSignature = hash_hmac('sha256', $rawBody, $secret);
+
+            if ($computedSignature !== $signature) {
+            throw new Exception('Invalid signature');
+            }
+
+            // process the webhook data here
+            ```
+        </Tabs.Tab>
+    <Tabs.Tab index={2}>
+        ```python
+        import hmac
+        import hashlib
+        import base64
+        from flask import request
+
+        secret = 'your_secret'  # Replace with your actual secret key
+        raw_body = request.get_data(as_text=True)  # The raw body of the request
+        signature = request.headers.get('X-Roamify-Signature')  # The signature from the request
+
+        computed_signature = hmac.new(
+            secret.encode('utf-8'),
+            raw_body.encode('utf-8'),
+            hashlib.sha256
+        ).hexdigest()
+
+        if computed_signature != signature:
+            raise Exception('Invalid signature')
+
+        # process the webhook data here
+        ```
+        </Tabs.Tab>
+    </Tabs>
+

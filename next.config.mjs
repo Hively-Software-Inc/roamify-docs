@@ -10,8 +10,6 @@ const withNextra = nextra({
 const nextConfig = {
     reactStrictMode: true,
     trailingSlash: true,
-    swcMinify: true,
-    optimizeFonts: true,
     headers: async () => {
         return [
             {
@@ -52,8 +50,7 @@ const nextConfig = {
         ],
     },
     devIndicators: {
-        buildActivity: true,
-        buildActivityPosition: "bottom-right",
+        position: "bottom-right",
     },
     eslint: {
         ignoreDuringBuilds: true,
