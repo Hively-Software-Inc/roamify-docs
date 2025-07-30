@@ -31,7 +31,7 @@ Here is a high level overview of the recommended practices for using Roamify Web
 - **Testing**: Test your webhook endpoint thoroughly to ensure that it can handle various scenarios, including valid and invalid requests, network issues, and other edge cases.
 - **Security**: Keep your webhook endpoint secure by implementing authentication and authorization mechanisms. This can include IP whitelisting, API keys, or other security measures to ensure that only authorized requests are processed.
 
-### Sample Verification Code
+### Sample Webhook Flow
 Below is a code snippet that demonstrates how to verify the signature of a webhook request in JavaScript:
  <Tabs items={['javascript', 'php', 'python']}>
         <Tabs.Tab index={0}>
@@ -74,6 +74,12 @@ Below is a code snippet that demonstrates how to verify the signature of a webho
             } else {
                 throw new Error('Unknown event category');
             }
+
+            return res.status(200).send({
+                code: 200,
+                message: 'success'
+            });
+        });
             ```
         </Tabs.Tab>
         <Tabs.Tab index={1}>
@@ -112,6 +118,11 @@ Below is a code snippet that demonstrates how to verify the signature of a webho
             } else {
                 throw new Exception('Unknown event category');
             }
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'success'
+            ]);
             ```
         </Tabs.Tab>
     <Tabs.Tab index={2}>
@@ -154,6 +165,11 @@ Below is a code snippet that demonstrates how to verify the signature of a webho
                 raise Exception('Unknown event type for affiliate')
         else:
             raise Exception('Unknown event category')
+
+        return {
+            'code': 200,
+            'message': 'success'
+        }
         ```
         </Tabs.Tab>
     </Tabs>
