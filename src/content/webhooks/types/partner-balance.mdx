@@ -58,7 +58,8 @@ Here is an example of the Partner Balance Event webhook payload:
 ```
 
 ## Mandatory Response
-You must respond with a 200 OK status code to acknowledge receipt of the webhook. If you do not respond within 5 seconds, the webhook will be retried up to 3 times at increasing intervals.
+You must respond with a 200 OK status code to acknowledge receipt of the webhook. We recommend responding quickly (within 3 seconds) to avoid overloading Roamify's webhook server.
+We recommend you send response first and then process the webhook data in the background to ensure that you do not miss any webhook events due to processing delays.
 
 ### Response Example
 ```json
