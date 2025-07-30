@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import {Callout} from 'nextra/components';
 
 # eSIM Status Event
 
@@ -7,6 +7,10 @@ import { Tabs } from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the eSIM status event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The eSIM Status Event webhook sends notifications when an eSIM's status changes. This allows you to monitor and respond to status transitions such as activation, deactivation, suspension, or other state changes.
@@ -28,6 +32,7 @@ The webhook payload contains the following fields:
       - `INSTALLED`: The eSIM has been installed on a device.
       - `ACTIVATED`: The eSIM has been activated and is currently in use.
       - `INACTIVE`: The eSIM is inactive and not currently in use.
+      - `DELETED`: The eSIM has been deleted from the device.
       - `REVOKED`: The eSIM has been revoked and is no longer valid.
       - `EXPIRED`: The eSIM has expired and is no longer valid.
       - `UNKNOWN`: The status of the eSIM is unknown or not specified.

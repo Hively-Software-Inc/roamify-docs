@@ -1,4 +1,4 @@
-import {Callout, Tabs} from 'nextra/components';
+import {Callout} from 'nextra/components';
 
 # eSIM Usage Event
 
@@ -7,6 +7,10 @@ import {Callout, Tabs} from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the eSIM usage event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The eSIM Usage Event webhook sends notifications about eSIM data usage at configurable intervals. This allows you to monitor data consumption and take appropriate actions based on usage patterns.
@@ -32,13 +36,14 @@ The webhook payload contains the following fields:
     - `start`: The start time of the usage period, in unix timestamp format (seconds since epoch).
     - `end`: The end time of the usage period, in unix timestamp format (seconds since epoch).
     - `status`: The status of the eSIM usage event. Possible values include:
-    - `NEW`: The eSIM is newly generated and not yet installed.
-    - `INSTALLED`: The eSIM has been installed on a device.
-    - `ACTIVATED`: The eSIM has been activated and is currently in use.
-    - `INACTIVE`: The eSIM is inactive and not currently in use.
-    - `REVOKED`: The eSIM has been revoked and is no longer valid.
-    - `EXPIRED`: The eSIM has expired and is no longer valid.
-    - `UNKNOWN`: The status of the eSIM is unknown or not specified.
+        - `NEW`: The eSIM is newly generated and not yet installed.
+        - `INSTALLED`: The eSIM has been installed on a device.
+        - `ACTIVATED`: The eSIM has been activated and is currently in use.
+        - `INACTIVE`: The eSIM is inactive and not currently in use.
+        - `DELETED`: The eSIM has been deleted from the device.
+        - `REVOKED`: The eSIM has been revoked and is no longer valid.
+        - `EXPIRED`: The eSIM has expired and is no longer valid.
+        - `UNKNOWN`: The status of the eSIM is unknown or not specified.
     - `package_id`: The unique identifier of the eSIM package.
     - `package_name`: The name of the eSIM package.
     - `data_units`: The units used for data allocation, typically "MB" (megabytes).

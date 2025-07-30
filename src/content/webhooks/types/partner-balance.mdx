@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import {Callout} from 'nextra/components';
 
 # Partner Balance Event
 
@@ -7,6 +7,10 @@ import { Tabs } from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the partner balance event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The Partner Balance Event webhook sends notifications about changes in your partner account balance. This allows you to monitor your account balance in real-time and track transactions that affect your balance.

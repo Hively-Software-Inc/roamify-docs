@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import {Callout, Tabs} from 'nextra/components';
 
 # Affiliate Orders Event
 
@@ -7,6 +7,10 @@ import { Tabs } from 'nextra/components';
 - [Overview](#overview)
 - [Event Payload](#event-payload)
 - [Example Payload](#example-payload)
+
+<Callout type="warning" emoji="⚠️">
+    Before you start using the affiliate orders event webhook, you need to configure your webhook URL in the Roamify dashboard. This URL will be used to receive notifications about eSIM status changes.
+</Callout>
 
 ## Overview
 The Affiliate Orders Event webhook sends notifications when orders are placed through your affiliate links. This allows you to track conversions, monitor affiliate performance, and calculate commissions in real-time.
