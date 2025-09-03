@@ -30,7 +30,7 @@ Our token is a Bearer token, which means you need to include it in the `Authoriz
 ### Step 2: Get eSIM Packages
 To get a list of eSIM packages, you need to send a `GET` request to the `/api/esim/packages` endpoint. 
 
-This endpoint will return a list of all available eSIM packages. You can also filter the packages by country and geography.
+This endpoint will return a list of all available eSIM packages. You can also filter the packages by country, geography, days, gbs and isUnlimited parameters.
 
 #### Usage - how to get eSIM packages
 Here is an example of how you can get a list of eSIM packages using Roamify eSIM API.
@@ -72,6 +72,10 @@ The request body should contain the following parameters:
 - `items`: An array of eSIMs you want to order. Each eSIM should contain the following details:
   - `packageId`: The ID of the eSIM package. This is a required field of type `string`.
   - `quantity`: The quantity of the eSIMs you want to order. This is a required field of type `number`.
+
+OR
+
+Alternatively, you can send a `POST` request to the `/api/esim/order` endpoint with the id your provided as 'referenceId' in the request body.
 
 #### Usage - how to create an eSIM order
 Here is an example of how you can create an eSIM order using Roamify eSIM API.
@@ -124,10 +128,13 @@ You can read more about this endpoint [here](/esims/orders).
 ### Step 4: Generate eSIM
 As soon as you submit an eSIM order, in the response, you will get a dedicated `esimId` for each eSIM package you ordered. You can use this `esimId` to generate an eSIM, which will be ready to be used by your customers.
 
+Alternatively, you can also use the `referenceId` you provided in the request body to generate an eSIM if applicable.
+
 To generate an eSIM, you need to send a `POST` request to the `/api/esim/apply` endpoint with the required body parameters.
 
 The request body should contain the following parameters:
 - `esimId`: The ID of the eSIM. This is a required field of type `string`.
+- `referenceId`: The reference ID you provided when creating the order. This is an optional field of type `string`. (Your custom reference ID for the order, if needed.))
 
 #### Usage - how to generate an eSIM profile
 Here is an example of how you can apply an eSIM profile using Roamify eSIM API.
